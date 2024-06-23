@@ -7,6 +7,11 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Error from './components/Error';
 import Category from './components/Category';
 import Menu from './components/Menu';
+import Login from './components/Login';
+import Admin from './components/Admin';
+import AdminMenu from './components/AdminMenu';
+import AdminCategory from './components/AdminCategory';
+import AdminBg from './components/AdminBg';
 
 
 const appRouter = createBrowserRouter([
@@ -22,6 +27,26 @@ const appRouter = createBrowserRouter([
       {
         path:'/Menu',
         element:<Menu/>
+      },
+      {
+        path:'/Login',
+        element:<Login/>
+      },
+      {
+        path:'/Admin',
+        element:<Admin/>
+      },
+      {
+        path:'/AdminMenu',
+        element:<AdminMenu/>
+      },
+      {
+        path:'/AdminCategory',
+        element:<AdminCategory/>
+      },
+      {
+        path:'/Adminfoon',
+        element:<AdminBg/>
       }
     ]
   }

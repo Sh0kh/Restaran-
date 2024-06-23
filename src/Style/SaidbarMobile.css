@@ -1,0 +1,75 @@
+.Saidbar__mobile{
+    padding: 25px;
+    width: 320px;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    background-color: #A79684;
+    border-right: 2px solid black;
+}
+.Saidbar__mobile img{
+    width: 100%;
+}
+.Saidbar__mobile-logo{
+    padding-bottom: 10px;
+    border-bottom: 2px solid white;
+}
+.Saidbar__mobile-main a{
+    margin-top: 10px;
+    display: block;
+    width: 100%;
+    padding: 10px 20px ;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: black;
+    font-size: 30px;
+    border-radius: 20px;
+    border: 2px solid white;
+}
+.Saidbar__mobile-main a:hover{
+    background-color: rgba(0, 0, 0, 0.733);
+    color: white;
+}
+@media(max-width:380px){
+    .Saidbar__mobile{
+        width: 280px !important;
+    }
+    .Saidbar__mobile a{
+        font-size: 20px;
+    }
+}
+@media(max-width:350px){
+    .Saidbar__mobile{
+        width: 240px !important;
+    }
+    .Saidbar__mobile a{
+        font-size: 20px;
+    }
+    .Saidbar__mobile{
+        padding: 10px   ;
+    }
+}
+@media(max-width:315px){
+    .Saidbar__mobile{
+        width: 200px !important;
+    }
+    .Saidbar__mobile a{
+        font-size: 20px;
+    }
+    .Saidbar__mobile{
+        padding: 10px   ;
+    }
+}
+@media(max-width:265px){
+    .Saidbar__mobile{
+        width: 150px !important;
+    }
+    .Saidbar__mobile a{
+        font-size: 20px;
+    }
+    .Saidbar__mobile{
+        padding: 10px   ;
+    }
+}

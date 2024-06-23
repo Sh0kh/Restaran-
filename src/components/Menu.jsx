@@ -5,7 +5,7 @@ import foto from '../img/Rectangle 8.png'
 import { NavLink } from 'react-router-dom'
 function Menu() {
     return (
-        <div className='Menu' >
+        <div className='Menu'>
          
             <header>
                 <div className='container header__wrapper' >

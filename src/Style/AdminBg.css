@@ -1,0 +1,132 @@
+.AdminBg{
+    width: 100%;
+}
+.AdminBg-content{
+    margin-left: 320px;
+}
+.AdminBg-header{
+    padding: 15px 20px ;
+    width: 100%;
+    background-color: #A79684;
+}
+.AdminBg-main{
+    padding: 20px;
+}
+.file-upload {
+    position: relative;
+    cursor: pointer;
+    display: inline;
+  }
+  input[type="file"] {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+    display: inline;
+  }
+  
+  .file-label {
+    display: inline;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 370px;
+    height: 200px;
+    border: 2px dashed #A79684;
+    border-radius: 30px;
+    cursor: pointer;
+
+  }
+  
+  .file-icon {
+    font-size: 48px;
+    color: #A79684;
+  }
+  
+  .file-text {
+    margin-top: 10px;
+    font-size: 20px;
+    color: #A79684;
+  }
+  .PdfAdmin-wrapper-card img{
+    overflow: hidden;
+    object-fit: cover;
+    object-position: center;
+    border: 2px solid #A79684;
+    width: 370px;
+    height: 200px;
+  }
+  .pdf-check{
+      position: relative;
+      width: 370px;
+      height: 200px;
+      background-color: #A79684;
+      border-radius: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+  }
+  .pdf-check h1{
+      color:#1A0A0A;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+  }
+  .pdf-check h1 svg{
+  
+  }
+  .pdf-bg{
+      background-color: rgba(0, 0, 0, 0.952);
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border-radius: 30px;
+  
+      display: none;
+  }
+  .pdf-check:hover{
+      .pdf-bg{
+          cursor: pointer;
+          display: block;
+      }
+  
+  }
+  .pdf-bg button{
+      margin: 0 auto;
+      margin-top: 75px;
+      display: block;
+      font-size: 50px;
+      background-color: transparent;
+      border: none;
+      color: red;
+  }
+  .AdminBg-main{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .AdminBg-header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  @media(max-width:1200px){
+    .AdminBg-content{
+        margin-left: 0;
+    }
+  }
+  .AdminBg-main{
+    width: 100%;
+  }
+  .file-upload{
+    width: 100%;
+  }
+  @media(max-width:400px){
+    .file-label{
+        width: 100%;
+    }
+  }

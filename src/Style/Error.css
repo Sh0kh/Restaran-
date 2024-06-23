@@ -1,0 +1,38 @@
+.Error{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* border: 2px solid #A79684;    */
+    background-color: #A79684;
+}
+.Error-wrapper h1{
+    font-size: 80px;
+
+}
+.Error-wrapper{
+    text-align: center;
+}
+.Error-wrapper a{
+    text-decoration: none;
+    /* width: 100%; */
+    background-color: white;
+    border: 2px solid white;
+    padding: 10px 50px ;
+    border-radius: 20px;
+    margin-top: 20px;
+    display: block;
+    color: black;
+    font-weight: bold;
+    cursor: pointer;
+}
+.Error-wrapper a:hover{
+    background-color: transparent;
+    color: white;
+}
+@media(max-width:260px){
+    .Error h1{
+        font-size: 40px;
+    }
+}

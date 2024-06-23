@@ -1,0 +1,386 @@
+.AdminMenu{
+    width: 100%;
+}
+.AdminMenu-content{
+
+    margin-left: 320px;
+}
+.AdminMenu-header{
+    padding: 15px 20px ;
+    width: 100%;
+    background-color: #A79684;
+}
+.AdminMenu-header-con{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.AdminMenu-header-btn{
+    padding: 10px 20px ;
+    border:2px solid white;
+    border-radius: 20px;
+    font-size: 20px;
+    transition: 0.5s;
+    cursor: pointer;
+}
+.AdminMenu-header-btn:hover{
+    background-color: transparent;
+    color: white;
+}
+.AdminMenu-header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.AdminMenu-main{
+    width: 100%;
+    padding: 20px;
+}
+.AdminMenu-main-category{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+.AdminMenu-main-category button{
+    padding: 10px 20px;
+    background-color: #A79684;
+    border: 2px solid #A79684;
+    border-radius: 10px;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    transition: 0.5s;
+}
+.AdminMenu-main-category button:hover{
+    background-color: transparent;
+    color: black;
+}
+.AdminMenu-table{
+    width: 100%;
+}
+.AdminMenu table{
+    width: 100%;
+    margin-top: 10px;
+}
+.AdminMenu thead{
+    width: 100%;
+}
+.AdminMenu table thead tr{
+    width: 100%;
+}
+.AdminMenu table tbody{
+    width: 100%;
+}
+.AdminMenu table tbody tr{
+    width: 100%;
+}
+.AdminMenu table tbody tr img{
+    width: 200px;
+    height: 150px;
+    border-radius: 20px;
+    border: 3px solid #1A0A0A;
+}
+.AdminMenu table thead tr th {
+    /* display: none; */
+    text-align: center;
+    padding: 20px;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+.AdminMenu table thead tr th h3{
+    /* display: none; */
+    color: white;
+    font-size: 20px;
+    padding-top: 20px;
+}
+.AdminMenu tbody h3{
+    color: white;
+    font-size: 20px;
+}
+.AdminMenu tbody p{
+    text-align: center;
+    width: 300px;
+    color: white;
+    font-size: 15px;
+    margin: 0 auto;
+    padding: 0;
+}
+.AdminMenu table tbody td {
+    text-align: center;
+    padding-top: 20px;
+}
+.delete{
+    font-size: 30px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.edit {
+    font-size: 30px;
+    cursor: pointer;
+}
+.delate:hover {
+    color: red;
+}
+.AdminMenu img{
+    overflow: hidden;
+    object-fit: cover;
+    object-position: center;
+}
+.edit:hover {
+    color: rgb(95, 95, 95);
+}
+.AdminMenu table  {
+    background-color: #A79684;
+    border-radius: 30px;
+    padding-bottom: 30px;
+}
+.AdminMenu table button{
+    color: white;
+    background-color: transparent;
+    border: none;
+}
+.AdminMenu-footer{
+    padding: 20px 10px ;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #A79684;
+    border-radius: 20px;
+}
+.AdminMenu-footer button{
+    padding: 10px;
+    background-color: white;
+    border: 2px solid white;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    font-size: 30px;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.5s;
+}
+.AdminMenu-footer button:hover{
+    background-color: transparent;
+    color: white;
+}
+.AdminMenu-footer-con{
+    color: white;
+    font-size: 20px;
+}
+.modal-create-bg, 
+ .modal-change-bg{
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.678);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.modal-create-content,
+.modal-change-content
+{
+    width: 50%;
+    background-color: #A79684;
+    padding: 20px;
+    border-radius: 10px;
+}
+.modal-create-content-header,
+.modal-change-content-header
+{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.modal-create-content-header button,
+.modal-change-content-header button
+{
+    background-color: white;
+    padding: 8px;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    border: 2px solid white;
+    transition: 0.5s;
+}
+.modal-create-content-header button:hover{
+    background-color: transparent;
+    color: white;
+}
+.modal-change-content-header button:hover{
+    background-color: transparent;
+    color: white;
+}
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.modal-foto {
+    width: 100%;
+}
+
+.file-input-container {
+    width: 100%;
+}
+
+.file-input-container {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    padding: 10px;
+    border: 1px solid white;
+    border-radius: 5px;
+    background-color: white;
+    cursor: pointer;
+    color: black;
+    width: 300px;
+}
+
+.file-input-container input[type=file] {
+    cursor: pointer;
+    position: absolute;
+    font-size: 100px;
+    opacity: 0;
+    right: 0;
+    top: 0;
+    cursor: pointer;
+}
+
+.file-input-container span {
+    display: block;
+    text-align: center;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.file-input-container:hover {
+    background-color: transparent;
+    color: white;
+    cursor: pointer;
+}
+.modal-create-content textarea,
+.modal-change-content textarea
+{
+    resize: none;
+    overflow: hidden;
+    width: 100%;
+    height: 100px;
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: 2px solid #DCE1EF;
+    outline-color: #2563EB; 
+}
+.modal-create-content label,
+.modal-change-content label
+{
+    display: block;
+    width: 100%;
+    margin-bottom: 20px;
+}
+.modal-create-content input,
+.modal-change-content input
+{
+    width: 100%;
+    padding: 10px 20px;
+    border-radius: 20px;
+    border: 2px solid white;
+}
+.modal-create-content form button,
+.modal-change-content form button
+{
+    width: 100%;
+    padding: 10px 20px ;
+    border-radius: 20px;
+    border: 2px solid white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.5s;
+    cursor: pointer;
+}
+.modal-create-content form button:hover{
+    background-color: transparent;
+    color: white;
+}
+.modal-change-content form button:hover{
+    background-color: transparent;
+    color: white;
+}
+.modal-create-content form,
+.modal-change-content form
+{
+    margin-top: 20px;
+}
+.modal-create-bg,
+.modal-change-bg
+{
+    display: none;
+}
+.db{
+    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+@media(max-width:910px){
+    .AdminMenu-table {
+        overflow: auto;
+        overflow-x: scroll;
+        width: 100%;
+    }
+
+    .AdminMenu table {
+        width: 900px;
+        overflow: auto;
+        overflow-x: scroll;
+        /* display: none; */
+        padding: 20px;
+    }
+    .AdminMenu table th{
+        padding: 0px;
+    }
+    .modal-create-content,
+    .modal-change-content
+    {
+        width: 80%;
+    }
+}
+
+
+@media(max-width:1200px){
+    .AdminMenu-content{
+        margin-left: 0;
+    }
+}
+@media(max-width:425px){
+    .AdminMenu-header h1{
+        font-size: 25px;
+    }
+    .AdminMenu-header-btn{
+        font-size:15px !important;
+    }
+    .AdminMenu-main-category button{
+        font-size: 15px;
+    }
+    .AdminMenu-main-category{
+        flex-wrap: wrap;
+    }
+    .modal-create-content,
+    .modal-change-content
+    {
+        width: 95%;
+    }
+}
+@media(max-width:350px){
+    .AdminMenu-header-con{
+        flex-direction: column;
+        gap: 10px;
+    }
+}

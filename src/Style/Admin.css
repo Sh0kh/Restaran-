@@ -1,0 +1,111 @@
+/* .Admin{
+    width: 100%;
+} */
+.Admin-content{
+    margin-left: 320px;
+}
+.Admin-header{
+    /* width: 100%; */
+    background-color: #A79684;
+    padding: 15px 20px ;
+}
+.Admin-content h1{
+    
+}
+.Admin-main{
+    width: 100%;
+    padding: 20px;
+}
+.Admin-card{
+    padding: 20px;
+    background-color: #A79684;
+    border: 2px solid black;
+    border-radius: 20px;
+    box-shadow: 5px 5px 5px  black;
+}
+.Admin-grid{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+.Admin-card h3{
+    font-size: 25px;
+}
+.Admin-card span{
+    font-size: 20px;
+    font-weight: bold
+}
+.Admin-card a{
+    width: 100%;
+    display: block;
+    text-decoration: none;
+    background-color: white;
+    padding: 5px 10px ;
+    border-radius: 10px;
+    border: 2px solid white;
+    color: black;
+    font-weight: bold;
+    transition: 0.5s;
+}
+.Admin-card a:hover{
+    background-color: transparent;
+}
+.Admin-wrapper{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 30px;
+}
+
+.Mobile-Bg{
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.644);
+        transform: translateX(-140%);
+        transition: all 2s ease;
+        z-index: 11;
+}
+.Mobile-active{
+    transform: translateX(0);
+    transition: all 2s ease;
+    z-index: 11;
+}
+.Admin-header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.Hamburger{
+    position: relative;
+    z-index: 15;
+    display: none;
+}
+@media(max-width:1200px){
+    .Admin-wrapper{
+        grid-template-columns: repeat(2,1fr);
+    }
+}
+@media(max-width:1200px){
+    .Admin-content{
+        margin-left: 0;
+    }
+    .Hamburger{
+        display: block;
+    }
+}
+@media(max-width:510px){
+    .Admin-wrapper{
+        grid-template-columns: repeat(1,1fr);
+    }
+}
+@media(max-width:300px){
+   .Admin-header h1{
+    font-size: 25px;
+   }
+   .Admin-card h3{
+    font-size: 20px;
+   }
+   .Admin-card span{
+    font-size: 15px;
+   }
+}
