@@ -15,6 +15,9 @@ function Menu() {
                         <NavLink to="/">
                             Ortga 
                         </NavLink>
+                        <NavLink to="/admin">
+                            admin
+                        </NavLink>
                 </div>
             </header>
             <div className='main' style={{backgroundImage:`url(${bg})`}}>
