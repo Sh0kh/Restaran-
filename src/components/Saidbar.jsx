@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import '../Style/Saidbar.css'
-import Logo from '../img/Rectangle 7.png'
+// import Logo from '../img/Rectangle 7.png'
 import { NavLink } from 'react-router-dom'
 function Saidbar() {
     const [ isActive, setActive] = useState(null)
@@ -9,9 +9,9 @@ function Saidbar() {
     }
   return (
     <div className='Saidbar'>
-        <div className='Saidbar-logo'>
+        {/* <div className='Saidbar-logo'>
             <img src={Logo} alt="foto" />
-        </div>
+        </div> */}
         <div className='Saidbar-main'>
             <NavLink to='/Admin'
             onClick={() => Activebtn(1)}

@@ -329,6 +329,23 @@ input[type="number"]::-webkit-inner-spin-button {
     align-items: center;
     justify-content: center;
 }
+form select{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    padding: 10px 20px;
+    border-radius: 20px;
+}
+.AdminMenu-main-category button{
+    color: black;
+    background-color: transparent ;
+}
+.active2{
+    background-color: #A79684 !important;
+    color: white !important;
+}
 @media(max-width:910px){
     .AdminMenu-table {
         overflow: auto;

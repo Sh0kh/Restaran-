@@ -16,6 +16,7 @@
     position: relative;
     cursor: pointer;
     display: inline;
+    width: 470px !important; 
   }
   input[type="file"] {
     position: absolute;
@@ -32,7 +33,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 370px;
+    width: 470px;
     height: 200px;
     border: 2px dashed #A79684;
     border-radius: 30px;
@@ -55,12 +56,12 @@
     object-fit: cover;
     object-position: center;
     border: 2px solid #A79684;
-    width: 370px;
+ width: 100%;
     height: 200px;
   }
   .pdf-check{
       position: relative;
-      width: 370px;
+      width: 470px;
       height: 200px;
       background-color: #A79684;
       border-radius: 30px;
@@ -105,14 +106,17 @@
       color: red;
   }
   .AdminBg-main{
-    display: flex;
-    align-items: center;
-    gap: 10px;
+
   }
   .AdminBg-header{
     display: flex;
     align-items: center;
     justify-content: space-between;
+  }
+  .AdminBg-main{
+    display: flex;
+    align-items: center;
+    gap: 10px;
   }
   @media(max-width:1200px){
     .AdminBg-content{
