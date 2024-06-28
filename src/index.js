@@ -30,23 +30,23 @@ const appRouter = createBrowserRouter([
       },
       {
         path:'/Login',
-        element:<Login/>
+        element: <Login/>
       },
       {
         path:'/Admin',
-        element:<Admin/>
+        element: localStorage.getItem("token") ?  <Admin/> :<Login/>
       },
       {
         path:'/AdminMenu',
-        element:<AdminMenu/>
+        element: localStorage.getItem("token") ? <AdminMenu/> :<Login/>
       },
       {
         path:'/AdminCategory',
-        element:<AdminCategory/>
+        element: localStorage.getItem("token") ?<AdminCategory/> :<Login/>
       },
       {
         path:'/Adminfoon',
-        element:<AdminBg/>
+        element: localStorage.getItem("token") ? <AdminBg/> :<Login/>
       }
     ]
   }

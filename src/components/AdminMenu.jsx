@@ -28,6 +28,7 @@ function AdminMenu() {
     const [filteredItems, setFilteredItems] = useState([]);
     const [menuName, setMenuName] = useState('');
     const [price, setPrice] = useState('');
+    const [discount, setDiscount] = useState('');
     const [info, setInfo] = useState('');
     const [iscategory, setCategory] = useState(0);
     const [selectedFile, setSelectedFile] = useState(null);
@@ -50,6 +51,7 @@ function AdminMenu() {
             price: price,
             description: info,
             category_id: iscategory,
+            discount: discount,
         };
         const formData = new FormData();
         for (let key of Object.keys(newMenu)) {
@@ -102,7 +104,7 @@ function AdminMenu() {
                     text: "Ochirildi",
                     duration: 3000,
                     gravity: "top", // `top` or `bottom`
-                    position: "right", // `left`, `center` or `right`
+                    position: "right", 
                     backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)",
                 }).showToast();
                 getAllMenu();
@@ -153,6 +155,7 @@ function AdminMenu() {
                     name: '',
                     price: '',
                     description: '',
+                    discount:'',
                     category_id: iscategory,
                 });
                 ChangeActive();
@@ -272,6 +275,11 @@ function AdminMenu() {
                                     </th>
                                     <th>
                                         <h3>
+                                            Skidka 
+                                        </h3>
+                                    </th>
+                                    <th>
+                                        <h3>
                                             Info
                                         </h3>
                                     </th>
@@ -296,6 +304,11 @@ function AdminMenu() {
                                         <td>
                                             <h3>
                                                 {i.price}
+                                            </h3>
+                                        </td>
+                                        <td>
+                                            <h3>
+                                                {i.discount}%
                                             </h3>
                                         </td>
                                         <td>
@@ -383,6 +396,15 @@ function AdminMenu() {
                                 onChange={(e) => setPrice(e.target.value)}
                                 required id='Price' type="number" />
                         </label>
+                        <label htmlFor="sk">
+                            <h3>
+                                Skidka
+                            </h3>
+                            <input
+                                value={discount}
+                                onChange={(e) => setDiscount(e.target.value)}
+                                id='sk' type="number" />
+                        </label>
                         <div className="modal-foto">
                             <h3>Фото</h3>
                             <label className="file-input-container" htmlFor="photo">
@@ -445,6 +467,15 @@ function AdminMenu() {
                                 value={currentEditItem.price}
                                 onChange={(e) => setCurrentEditItem({ ...currentEditItem, price: e.target.value })}
                                 id='Price' type="number" />
+                        </label>
+                        <label htmlFor="sk">
+                            <h3>
+                                Skidka
+                            </h3>
+                            <input
+                                value={currentEditItem.discount}
+                                onChange={(e) => setCurrentEditItem({ ...currentEditItem, discount: e.target.value })}
+                                id='sk' type="number" />
                         </label>
                         <div className="modal-foto">
                             <h3>Фото</h3>

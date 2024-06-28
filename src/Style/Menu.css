@@ -65,7 +65,9 @@ header a:hover{
 }
 .main__card img{
     width: 100%;
-    border-radius: 20PX;
+    height: 350px;
+    object-fit: cover;
+    /* border-radius: 20PX; */
 }
 .main__card__grid{
     width: 100%;
@@ -98,6 +100,33 @@ header a:hover{
     letter-spacing: 2px;
     word-spacing: 5px;
     line-height: 20px;
+}
+.main__card {
+    position: relative;
+}
+.discount{
+    z-index: 1000;
+    /* position: absolute; */
+    border-bottom-left-radius:10px ;
+    border-bottom-right-radius:10px ;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+    background-color: #A79684;
+}
+.novin{
+    border-top-left-radius:10px ;
+    border-top-right-radius:10px ;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+    background-color: #A79684;
+}
+.main__card span{
+    color: white;
+    font-size: 20px;
 }
 @media(max-width:1330px){
     .main__card{
