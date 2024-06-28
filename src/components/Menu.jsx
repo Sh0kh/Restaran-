@@ -1,9 +1,23 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import '../Style/Menu.css'
 import bg from '../img/Мену.png'
-import foto from '../img/Rectangle 8.png'
-import { NavLink } from 'react-router-dom'
+import CONFIG from '../store/config'
+import { NavLink, useParams } from 'react-router-dom'
 function Menu() {
+
+    let location  = useParams()
+   const [x, setX] = useState(null)
+
+   useEffect(() => {
+       getData()
+   }, [])
+   async function getData() {
+       const fetchData = await fetch('https://darxon.onrender.com/api/category')
+       const json = await fetchData.json()
+       setX(json)
+   }
+
+   let filteredCat = x?.find((item)=>item.id === Number(location.categoryID) )
     return (
         <div className='Menu'>
          
@@ -24,186 +38,34 @@ function Menu() {
             <div className='Menu__overflow'></div>
                 <div className='container'>
                 <div className='main__wrapper'>
-                    <div className='main__card'>
-                        <img src={foto} alt="foto" />
-                        <div className='main__card__grid'>
-                        <h2>
-                            Title
-                        </h2>
-                        <div className='card__line'>
+                    {filteredCat?.menu?.map((item)=>{
+                        return(
+                            <div className='main__card'>
+                            <img src={CONFIG.API_URL + item.image}  alt="foto" />
+                            <div className='main__card__grid'>
+                            <h2>
+                               {item.name}
+                            </h2>
+                            <div className='card__line'>
+    
+                            </div>
+                            <p>
+                                {item.description}
+                            </p>
+                            <div className='card__line'>
+            
+                            </div>
+                            <h2>
+                                {item.price} so'm
+                            </h2>
+                            </div>
+                        </div>
+                        )
+                    })}
+                   
 
-                        </div>
-                        <p>
-                            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quod, adipisci! Molestiae distinctio laborum eveniet doloremque ullam, labore ducimus. Dolorem, nostrum.
-                        </p>
-                        <div className='card__line'>
-        
-                        </div>
-                        <h2>
-                            20000 so'm
-                        </h2>
-                        </div>
-                    </div>
-                    <div className='main__card'>
-                        <img src={foto} alt="foto" />
-                        <div className='main__card__grid'>
-                        <h2>
-                            Title
-                        </h2>
-                        <div className='card__line'>
 
-                        </div>
-                        <p>
-                            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quod, adipisci! Molestiae distinctio laborum eveniet doloremque ullam, labore ducimus. Dolorem, nostrum.
-                        </p>
-                        <div className='card__line'>
-        
-                        </div>
-                        <h2>
-                            20000 so'm
-                        </h2>
-                        </div>
-                    </div>
-                    <div className='main__card'>
-                        <img src={foto} alt="foto" />
-                        <div className='main__card__grid'>
-                        <h2>
-                            Title
-                        </h2>
-                        <div className='card__line'>
-
-                        </div>
-                        <p>
-                            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quod, adipisci! Molestiae distinctio laborum eveniet doloremque ullam, labore ducimus. Dolorem, nostrum.
-                        </p>
-                        <div className='card__line'>
-        
-                        </div>
-                        <h2>
-                            20000 so'm
-                        </h2>
-                        </div>
-                    </div>
-                    <div className='main__card'>
-                        <img src={foto} alt="foto" />
-                        <div className='main__card__grid'>
-                        <h2>
-                            Title
-                        </h2>
-                        <div className='card__line'>
-
-                        </div>
-                        <p>
-                            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quod, adipisci! Molestiae distinctio laborum eveniet doloremque ullam, labore ducimus. Dolorem, nostrum.
-                        </p>
-                        <div className='card__line'>
-        
-                        </div>
-                        <h2>
-                            20000 so'm
-                        </h2>
-                        </div>
-                    </div>
-                    <div className='main__card'>
-                        <img src={foto} alt="foto" />
-                        <div className='main__card__grid'>
-                        <h2>
-                            Title
-                        </h2>
-                        <div className='card__line'>
-
-                        </div>
-                        <p>
-                            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quod, adipisci! Molestiae distinctio laborum eveniet doloremque ullam, labore ducimus. Dolorem, nostrum.
-                        </p>
-                        <div className='card__line'>
-        
-                        </div>
-                        <h2>
-                            20000 so'm
-                        </h2>
-                        </div>
-                    </div>
-                    <div className='main__card'>
-                        <img src={foto} alt="foto" />
-                        <div className='main__card__grid'>
-                        <h2>
-                            Title
-                        </h2>
-                        <div className='card__line'>
-
-                        </div>
-                        <p>
-                            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quod, adipisci! Molestiae distinctio laborum eveniet doloremque ullam, labore ducimus. Dolorem, nostrum.
-                        </p>
-                        <div className='card__line'>
-        
-                        </div>
-                        <h2>
-                            20000 so'm
-                        </h2>
-                        </div>
-                    </div>
-                    <div className='main__card'>
-                        <img src={foto} alt="foto" />
-                        <div className='main__card__grid'>
-                        <h2>
-                            Title
-                        </h2>
-                        <div className='card__line'>
-
-                        </div>
-                        <p>
-                            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quod, adipisci! Molestiae distinctio laborum eveniet doloremque ullam, labore ducimus. Dolorem, nostrum.
-                        </p>
-                        <div className='card__line'>
-        
-                        </div>
-                        <h2>
-                            20000 so'm
-                        </h2>
-                        </div>
-                    </div>
-                    <div className='main__card'>
-                        <img src={foto} alt="foto" />
-                        <div className='main__card__grid'>
-                        <h2>
-                            Title
-                        </h2>
-                        <div className='card__line'>
-
-                        </div>
-                        <p>
-                            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quod, adipisci! Molestiae distinctio laborum eveniet doloremque ullam, labore ducimus. Dolorem, nostrum.
-                        </p>
-                        <div className='card__line'>
-        
-                        </div>
-                        <h2>
-                            20000 so'm
-                        </h2>
-                        </div>
-                    </div>
-                    <div className='main__card'>
-                        <img src={foto} alt="foto" />
-                        <div className='main__card__grid'>
-                        <h2>
-                            Title
-                        </h2>
-                        <div className='card__line'>
-
-                        </div>
-                        <p>
-                            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quod, adipisci! Molestiae distinctio laborum eveniet doloremque ullam, labore ducimus. Dolorem, nostrum.
-                        </p>
-                        <div className='card__line'>
-        
-                        </div>
-                        <h2>
-                            20000 so'm
-                        </h2>
-                        </div>
-                    </div>
+                   
                 </div>
                 </div>
             </div>

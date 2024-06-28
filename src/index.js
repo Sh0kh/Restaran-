@@ -25,7 +25,7 @@ const appRouter = createBrowserRouter([
         element:<Category/>,
       },
       {
-        path:'/Menu',
+        path:'/Menu/:categoryID',
         element:<Menu/>
       },
       {

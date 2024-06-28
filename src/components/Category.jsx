@@ -1,128 +1,69 @@
-import React from 'react'
-import '../Style/Category.css'
-import logo from '../img/Rectangle 7.png'
-import bg from '../img/Мену.png'
-import { NavLink } from 'react-router-dom'
+import React, { useEffect, useState } from 'react';
+import axios from '../Service/axios';
+import '../Style/Category.css';
+import logo from '../img/Rectangle 7.png';
+import { NavLink } from 'react-router-dom';
+import CONFIG from '../store/config';
 
 function Category() {
-  return (
-    <div className='Category'>
-        
-        <header>
-            <div className='container header-wrapper'>
-                <img src={logo} alt="" />
-            </div>
-        </header>
-        <div className='Main'  style={{backgroundImage:`url(${bg})`}}>
-        <div className='Menu__overflow'></div>
-            <div className='container'>
-                <div className='Main-wrapper'>
-                    <NavLink to="/Menu">
-                    <div className='Main-card'>
-                        <img src="https://www.gazeta.uz/media/img/2021/08/iqz8sx16282410420244_l.jpg" alt="foto" />
-                        <div className='card-over'>
-                            <h2>
-                                OSh
-                            </h2>
-                        </div>
-                    </div>
-                    </NavLink>
-                    <NavLink to="/Menu">
-                    <div className='Main-card'>
-                        <img src="https://www.gazeta.uz/media/img/2021/08/iqz8sx16282410420244_l.jpg" alt="foto" />
-                        <div className='card-over'>
-                            <h2>
-                                OSh
-                            </h2>
-                        </div>
-                    </div>
-                    </NavLink>
-                    <NavLink to="/Menu">
-                    <div className='Main-card'>
-                        <img src="https://www.gazeta.uz/media/img/2021/08/iqz8sx16282410420244_l.jpg" alt="foto" />
-                        <div className='card-over'>
-                            <h2>
-                                OSh
-                            </h2>
-                        </div>
-                    </div>
-                    </NavLink>
-                    <NavLink to="/Menu">
-                    <div className='Main-card'>
-                        <img src="https://www.gazeta.uz/media/img/2021/08/iqz8sx16282410420244_l.jpg" alt="foto" />
-                        <div className='card-over'>
-                            <h2>
-                                OSh
-                            </h2>
-                        </div>
-                    </div>
-                    </NavLink>
-                    <NavLink to="/Menu">
-                    <div className='Main-card'>
-                        <img src="https://www.gazeta.uz/media/img/2021/08/iqz8sx16282410420244_l.jpg" alt="foto" />
-                        <div className='card-over'>
-                            <h2>
-                                OSh
-                            </h2>
-                        </div>
-                    </div>
-                    </NavLink>
-                    <NavLink to="/Menu">
-                    <div className='Main-card'>
-                        <img src="https://www.gazeta.uz/media/img/2021/08/iqz8sx16282410420244_l.jpg" alt="foto" />
-                        <div className='card-over'>
-                            <h2>
-                                OSh
-                            </h2>
-                        </div>
-                    </div>
-                    </NavLink>
-                    <NavLink to="/Menu">
-                    <div className='Main-card'>
-                        <img src="https://www.gazeta.uz/media/img/2021/08/iqz8sx16282410420244_l.jpg" alt="foto" />
-                        <div className='card-over'>
-                            <h2>
-                                OSh
-                            </h2>
-                        </div>
-                    </div>
-                    </NavLink>
-                    <NavLink to="/Menu">
-                    <div className='Main-card'>
-                        <img src="https://www.gazeta.uz/media/img/2021/08/iqz8sx16282410420244_l.jpg" alt="foto" />
-                        <div className='card-over'>
-                            <h2>
-                                OSh
-                            </h2>
-                        </div>
-                    </div>
-                    </NavLink>
-                    <NavLink to="/Menu">
-                    <div className='Main-card'>
-                        <img src="https://www.gazeta.uz/media/img/2021/08/iqz8sx16282410420244_l.jpg" alt="foto" />
-                        <div className='card-over'>
-                            <h2>
-                                OSh
-                            </h2>
-                        </div>
-                    </div>
-                    </NavLink>
-                    <NavLink to="/Menu">
-                    <div className='Main-card'>
-                        <img src="https://www.gazeta.uz/media/img/2021/08/iqz8sx16282410420244_l.jpg" alt="foto" />
-                        <div className='card-over'>
-                            <h2>
-                                OSh
-                            </h2>
-                        </div>
-                    </div>
-                    </NavLink>
-                   
+    const [category, setCategory] = useState(null);
+    const [backgroundImage, setBackgroundImage] = useState([]);
+
+    useEffect(() => {
+        getCategory();
+        getBackgroundImage();
+    }, []);
+
+    const getCategory = () => {
+        axios.get('/category')
+            .then((response) => {
+                setCategory(response.data);
+            })
+            .catch((error) => {
+            });
+    };
+
+    const getBackgroundImage = () => {
+        axios.get('/background')
+            .then((response) => {
+                    setBackgroundImage(response.data);
+                    
+            })
+            .catch((error) => {
+
+            });
+    };
+
+    return (
+        <div className='Category'>
+            <header>
+                <div className='container header-wrapper'>
+                    <img src={logo} alt="Logo" />
                 </div>
-            </div>
+            </header>
+          {backgroundImage?.map((item)=>(
+              <div className='Main' style={{ backgroundImage: `url(${CONFIG.API_URL + item.image})` }} key={item}>
+              <div className='Menu__overflow'></div>
+              <div className='container'>
+                  <div className='Main-wrapper'>
+                      {category?.map((item) => {
+                          return (
+                              <NavLink to={`/Menu/${item?.id}`} key={item?.id}>
+                                  <div className='Main-card'>
+                                      <img src={CONFIG.API_URL + item.image} alt="Category" />
+                                      <div className='card-over'>
+                                          <h2>{item?.name}</h2>
+                                      </div>
+                                  </div>
+                              </NavLink>
+                          );
+                      })}
+                  </div>
+              </div>
+          </div>
+          ))}
         </div>
-    </div>
-  )
+    );
 }
 
-export default Category
+export default Category;
