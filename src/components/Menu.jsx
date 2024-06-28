@@ -1,25 +1,18 @@
-import React, { useEffect, useState } from 'react'
-import '../Style/Menu.css'
-import CONFIG from '../store/config'
-import { NavLink, useParams } from 'react-router-dom'
+import React, { useEffect, useState } from 'react';
+import '../Style/Menu.css';
+import CONFIG from '../store/config';
+import { NavLink, useParams } from 'react-router-dom';
 import axios from '../Service/axios';
+
 function Menu() {
-
-    let location = useParams()
-    const [x, setX] = useState(null)
+    let location = useParams();
     const [backgroundImage, setBackgroundImage] = useState([]);
-    const [isVisible, setIsVisible] = useState(true);
+    const [x, setX] = useState(null)
+
     useEffect(() => {
-        getData()
-        getBackgroundImage()
-
-        const timer = setTimeout(() => {
-            setIsVisible(false);
-          }, 3 * 24 * 60 * 60 * 1000);
-
-        // Очистка таймера при размонтировании компонента
-        return () => clearTimeout(timer);
-    }, [])
+        getData();
+        getBackgroundImage();
+    }, []);
     async function getData() {
         const fetchData = await fetch('https://darxon.onrender.com/api/category')
         const json = await fetchData.json()
@@ -29,85 +22,59 @@ function Menu() {
         axios.get('/background')
             .then((response) => {
                 setBackgroundImage(response.data);
-
             })
             .catch((error) => {
-
+                console.error('Error fetching background image:', error);
             });
     };
-    let filteredCat = x?.find((item) => item.id === Number(location.categoryID))
+    let filteredCat = x?.find((item) => item.id === Number(location.categoryID));
     return (
         <div className='Menu'>
-
             <header>
-                <div className='container header__wrapper' >
-                    <h1>
-                        Logo
-                    </h1>
-                    <NavLink to="/">
-                        Ortga
-                    </NavLink>
-                    <NavLink to="/admin">
-                        admin
-                    </NavLink>
+                <div className='container header__wrapper'>
+                    <h1>Logo</h1>
+                    <NavLink to="/">Ortga</NavLink>
+                    <NavLink to="/admin">admin</NavLink>
                 </div>
             </header>
             {backgroundImage?.map((item) => (
-                <div className='main' style={{ backgroundImage: `url(${CONFIG.API_URL + item.image})` }} key={item} >
+                <div className='main' style={{ backgroundImage: `url(${CONFIG.API_URL + item.image})` }} key={item.id}>
                     <div className='Menu__overflow'></div>
                     <div className='container'>
                         <div className='main__wrapper'>
                             {filteredCat?.menu?.map((item) => {
+                                const itemDate = new Date(item.createdAt);
+                                const currentDate = new Date();
+                                const differenceInMillis = currentDate - itemDate;
+                                const differenceInDays = differenceInMillis / (1000 * 60 * 60 * 24);
+
                                 return (
-                                    <div className='main__card' >
-                                        {/* <div className='novin'>
-                                            <span>
-                                                Новинка
-                                            </span>
-                                        </div> */}
-                                        {isVisible && (
+                                    <div className='main__card' key={item.id}>
+                                        {differenceInDays <= 3 ? (
                                             <div className='novin'>
-                                                <span>
-                                                    Новинка
-                                                </span>
+                                                <span>Новинка</span>
                                             </div>
-                                        )}
+                                        ) : null}
                                         <img src={CONFIG.API_URL + item.image} alt="foto" />
                                         <div className='main__card__grid'>
-                                            <h2>
-                                                {item.name}
-                                            </h2>
-                                            <div className='card__line'>
-
-                                            </div>
-                                            <p>
-                                                {item.description}
-                                            </p>
-                                            <div className='card__line'>
-
-                                            </div>
-                                            <h2>
-                                                {item.price} so'm
-                                            </h2>
+                                            <h2>{item.name}</h2>
+                                            <div className='card__line'></div>
+                                            <p>{item.description}</p>
+                                            <div className='card__line'></div>
+                                            <h2>{item.price} so'm</h2>
                                         </div>
                                         <div className='discount'>
-                                            <span>
-                                                {item.discount ? `Скидка ${item.discount} %` : ""}
-                                            </span>
+                                            <span>{item.discount ? `Скидка ${item.discount} %` : ""}</span>
                                         </div>
                                     </div>
-                                )
+                                );
                             })}
-
-
-
-
                         </div>
                     </div>
                 </div>
             ))}
         </div>
-    )
+    );
 }
 
-export default Menu
+export default Menu;
