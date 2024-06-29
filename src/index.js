@@ -8,7 +8,6 @@ import Error from './components/Error';
 import Category from './components/Category';
 import Menu from './components/Menu';
 import Login from './components/Login';
-import Admin from './components/Admin';
 import AdminMenu from './components/AdminMenu';
 import AdminCategory from './components/AdminCategory';
 import AdminBg from './components/AdminBg';
@@ -31,10 +30,6 @@ const appRouter = createBrowserRouter([
       {
         path:'/Login',
         element: <Login/>
-      },
-      {
-        path:'/Admin',
-        element: localStorage.getItem("token") ?  <Admin/> :<Login/>
       },
       {
         path:'/AdminMenu',

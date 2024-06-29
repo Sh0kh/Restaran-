@@ -81,6 +81,12 @@ function AdminMenu() {
                 }).showToast();
                 ModalActive();
                 getAllMenu();
+                setCategory('')
+                setInfo('')
+                setMenuName('')
+                setPrice('')
+                setDiscount('')
+                setSelectedFile(null)
             })
             .catch((error) => {
                 console.error('Error creating new item:', error.response || error.message);
@@ -407,6 +413,7 @@ function AdminMenu() {
                                 Narx
                             </h3>
                             <input
+                            
                                 value={price}
                                 onChange={(e) => setPrice(e.target.value)}
                                 required id='Price' type="number" />
@@ -416,6 +423,7 @@ function AdminMenu() {
                                 Skidka
                             </h3>
                             <input
+
                                 value={discount}
                                 onChange={(e) => setDiscount(e.target.value)}
                                 id='sk' type="number" />
@@ -424,7 +432,7 @@ function AdminMenu() {
                             <h3>Фото</h3>
                             <label className="file-input-container" htmlFor="photo">
                                 <span className='soz'>Фото</span>
-                                <input onChange={handleFileChange} id="photo" accept="image/*" type="file" />
+                                <input required onChange={handleFileChange} id="photo" accept="image/*" type="file" />
                             </label>
                         </div>
                         <label htmlFor="productText">
@@ -439,15 +447,15 @@ function AdminMenu() {
                                 rows=""
                             />
                         </label>
-                        <select value={iscategory} onChange={(e) => setCategory(e.target.value)}>
+                        <select  value={iscategory} onChange={(e) => setCategory(e.target.value)}>
                             <option value="">Select a categ</option>
                             {isItemCategory.map((category) => (
-                                <option key={category.id} value={category.id}>
+                                <option  key={category.id} value={category.id}>
                                     {category.name}
                                 </option>
                             ))}
                         </select>
-                      <label htmlFor="">
+                      <label className='lel' htmlFor="">
                         <h3>
                             Turi
                         </h3>

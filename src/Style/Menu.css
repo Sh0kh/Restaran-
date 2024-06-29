@@ -67,8 +67,7 @@ header a:hover{
     width: 100%;
     height: 350px;
     object-fit: cover;
-    border-top-left-radius: 20PX;
-    border-top-right-radius: 20PX;
+    border-radius: 5px;
 }
 .main__card__grid{
     width: 100%;

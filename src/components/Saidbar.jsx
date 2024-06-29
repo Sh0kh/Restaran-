@@ -13,15 +13,6 @@ function Saidbar() {
             <img src={Logo} alt="foto" />
         </div>
         <div className='Saidbar-main'>
-            <NavLink to='/Admin'
-            onClick={() => Activebtn(1)}
-            className={`${isActive === 1 ? 'Saidbar-active' : ''}`}
-            >
-            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="M10 20v-6h4v6h5v-8h3L12 3L2 12h3v8z"/></svg>
-            <span>
-                Home
-            </span>
-            </NavLink>
             <NavLink to='/AdminMenu'
             onClick={()=> Activebtn(2)}
             className={`${isActive === 2 ? 'Saidbar-active' : ''}`}

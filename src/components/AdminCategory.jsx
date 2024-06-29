@@ -58,6 +58,8 @@ function AdminCategory() {
             }).showToast();
             ModalActive();
             getAllCategory(); 
+            setCategoryName('')
+            setSelectedFile(null)
         })
         .catch((error) => {
             Toastify({

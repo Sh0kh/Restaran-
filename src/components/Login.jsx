@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from 'react'
+// import { useNavigate } from "react-router-dom";
 import logo from '../img/Rectangle 7.png'
 import '../Style/Login.css'
 import axios from '../Service/axios'
@@ -10,7 +10,13 @@ function Login() {
         phone: '',
         password: '',
       });
-      const navigate = useNavigate();
+      // const navigate = useNavigate();
+      useEffect(() => {
+        const token = localStorage.getItem('token');
+        if (token) {
+            window.location.href = '/AdminMenu';
+        }
+    }, []);
       const loginAdmin = (e) => {
         e.preventDefault();
         const data = {
@@ -23,7 +29,7 @@ function Login() {
           .then((res) => {
             setLogin({ phone: '', password: '' });
             localStorage.setItem('token', res.data.tokens.refresh_token);
-            navigate('/Admin');
+            window.location.href = '/AdminMenu';
           })
           .catch((error) => {
             Toastify({

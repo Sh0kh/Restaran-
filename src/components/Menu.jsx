@@ -3,12 +3,12 @@ import '../Style/Menu.css';
 import CONFIG from '../store/config';
 import { NavLink, useParams } from 'react-router-dom';
 import axios from '../Service/axios';
-
+import logo from '../img/Rectangle 7.png'
 function Menu() {
     let location = useParams();
     const [backgroundImage, setBackgroundImage] = useState([]);
     const [x, setX] = useState(null)
-
+    const [menuHeight, setMenuHeight] = useState(0);
     useEffect(() => {
         getData();
         getBackgroundImage();
@@ -22,6 +22,7 @@ function Menu() {
         axios.get('/background')
             .then((response) => {
                 setBackgroundImage(response.data);
+                setMenuHeight(response.data.length);
             })
             .catch((error) => {
                 console.error('Error fetching background image:', error);
@@ -32,13 +33,17 @@ function Menu() {
         <div className='Menu'>
             <header>
                 <div className='container header__wrapper'>
-                    <h1>Logo</h1>
+                    <img src={logo} alt="" />
                     <NavLink to="/">Ortga</NavLink>
-                    <NavLink to="/admin">admin</NavLink>
                 </div>
             </header>
             {backgroundImage?.map((item) => (
-                <div className='main' style={{ backgroundImage: `url(${CONFIG.API_URL + item.image})` }} key={item.id}>
+                <div className='main'
+                style={{
+                    backgroundImage: `url(${CONFIG.API_URL + item.image})`,
+                    height: menuHeight > 3 ? '100%' : '100vh'
+                }}
+                 key={item.id}>
                     <div className='Menu__overflow'></div>
                     <div className='container'>
                         <div className='main__wrapper'>
@@ -64,7 +69,7 @@ function Menu() {
                                             <h2>{item.price} so'm</h2>
                                         </div>
                                         <div className='discount'>
-                                            <span>{item.discount ? `Скидка ${item.discount} %` : ""}</span>
+                                        <span>{item.discount > 0 ? `Скидка ${item.discount} %` : ""}</span>
                                         </div>
                                     </div>
                                 );

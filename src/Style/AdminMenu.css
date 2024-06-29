@@ -346,6 +346,23 @@ form select{
     background-color: #A79684 !important;
     color: white !important;
 }
+input[type="checkbox"] {
+    font-size: 50px;
+    width: 50px; /* Устанавливаем размеры */
+    height: 50px;
+    border: 20px solid #ccc; /* Рамка */
+    border-radius: 3px; /* Закругленные углы */
+    text-align: left !important;
+    display: block;
+  }
+.lel{
+    display: flex;
+    align-items: center;
+    justify-content: start;
+}
+.lel input{
+    width: 5% !important
+}
 @media(max-width:910px){
     .AdminMenu-table {
         overflow: auto;
