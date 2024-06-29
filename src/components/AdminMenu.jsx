@@ -31,6 +31,7 @@ function AdminMenu() {
     const [discount, setDiscount] = useState('');
     const [info, setInfo] = useState('');
     const [iscategory, setCategory] = useState(0);
+    const [checked, setChecked] = useState(false);
     const [selectedFile, setSelectedFile] = useState(null);
     const [menuPage, setMenuPage] = useState(1);
     const [currentEditItem, setCurrentEditItem] = useState({
@@ -42,7 +43,10 @@ function AdminMenu() {
     });
     const [selectedCategory, setSelectedCategory] = useState(0);
     const CategoryPag = 3;
-
+    const handleCheckboxChange = () => {
+        const newChecked = !checked;
+        setChecked(newChecked);
+    }
     const createMenu = (e) => {
         e.preventDefault();
 
@@ -52,6 +56,7 @@ function AdminMenu() {
             description: info,
             category_id: iscategory,
             discount: discount,
+            type:checked,
         };
         const formData = new FormData();
         for (let key of Object.keys(newMenu)) {
@@ -280,6 +285,11 @@ function AdminMenu() {
                                     </th>
                                     <th>
                                         <h3>
+                                            Turi 
+                                        </h3>
+                                    </th>
+                                    <th>
+                                        <h3>
                                             Info
                                         </h3>
                                     </th>
@@ -309,6 +319,11 @@ function AdminMenu() {
                                         <td>
                                             <h3>
                                                 {i.discount}%
+                                            </h3>
+                                        </td>
+                                        <td>
+                                            <h3>
+                                                {i.type === true ? "Katta" : 'Odiy'}
                                             </h3>
                                         </td>
                                         <td>
@@ -432,6 +447,16 @@ function AdminMenu() {
                                 </option>
                             ))}
                         </select>
+                      <label htmlFor="">
+                        <h3>
+                            Turi
+                        </h3>
+                      <input 
+                      value={checked}
+                      onChange={handleCheckboxChange} type="checkbox" name="" id="" 
+                      
+                      />
+                      </label>
                         <button type='submit'>
                             Yaratish
                         </button>

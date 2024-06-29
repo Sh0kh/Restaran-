@@ -22,7 +22,7 @@ function AdminCategory() {
         setChange(!isChange)
     }
 
-    const [isCategoryName, setCategoryName] = useState(null)
+    const [isCategoryName, setCategoryName] = useState('')
     const [selectedFile, setSelectedFile] = useState(null);
     const [isItemCategory, setItemCategory] = useState([])
     const [currentPage, setCurrentPage] = useState(1);
