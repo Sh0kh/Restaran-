@@ -3,21 +3,26 @@ import '../Style/Menu.css';
 import CONFIG from '../store/config';
 import { NavLink, useParams } from 'react-router-dom';
 import axios from '../Service/axios';
-import logo from '../img/Rectangle 7.png'
+import logo from '../img/Rectangle 7.png';
+
 function Menu() {
     let location = useParams();
     const [backgroundImage, setBackgroundImage] = useState([]);
-    const [x, setX] = useState(null)
+    const [x, setX] = useState(null);
     const [menuHeight, setMenuHeight] = useState(0);
+    const [selectedItem, setSelectedItem] = useState(null); // State to track the selected item
+
     useEffect(() => {
         getData();
         getBackgroundImage();
     }, []);
+
     async function getData() {
-        const fetchData = await fetch('https://darxon.onrender.com/api/category')
-        const json = await fetchData.json()
-        setX(json)
+        const fetchData = await fetch('https://darxon.onrender.com/api/category');
+        const json = await fetchData.json();
+        setX(json);
     }
+
     const getBackgroundImage = () => {
         axios.get('/background')
             .then((response) => {
@@ -28,7 +33,17 @@ function Menu() {
                 console.error('Error fetching background image:', error);
             });
     };
+
     let filteredCat = x?.find((item) => item.id === Number(location.categoryID));
+
+    const handleCardClick = (item) => {
+        setSelectedItem(item); // Set the selected item to open the modal
+    };
+
+    const handleCloseModal = () => {
+        setSelectedItem(null); // Clear the selected item to close the modal
+    };
+
     return (
         <div className='Menu'>
             <header>
@@ -39,11 +54,11 @@ function Menu() {
             </header>
             {backgroundImage?.map((item) => (
                 <div className='main'
-                style={{
-                    backgroundImage: `url(${CONFIG.API_URL + item.image})`,
-                    height: menuHeight > 3 ? '100%' : '100vh'
-                }}
-                 key={item.id}>
+                    style={{
+                        backgroundImage: `url(${CONFIG.API_URL + item.image})`,
+                        height: menuHeight > 3 ? '100vh' : 'auto'
+                    }}
+                    key={item.id}>
                     <div className='Menu__overflow'></div>
                     <div className='container'>
                         <div className='main__wrapper'>
@@ -54,7 +69,7 @@ function Menu() {
                                 const differenceInDays = differenceInMillis / (1000 * 60 * 60 * 24);
 
                                 return (
-                                    <div className='main__card' key={item.id}>
+                                    <div className='main__card' key={item.id} onClick={() => handleCardClick(item)}>
                                         {differenceInDays <= 3 ? (
                                             <div className='novin'>
                                                 <span>Новинка</span>
@@ -64,12 +79,10 @@ function Menu() {
                                         <div className='main__card__grid'>
                                             <h2>{item.name}</h2>
                                             <div className='card__line'></div>
-                                            <p>{item.description}</p>
-                                            <div className='card__line'></div>
                                             <h2>{item.price} so'm</h2>
                                         </div>
                                         <div className='discount'>
-                                        <span>{item.discount > 0 ? `Скидка ${item.discount} %` : ""}</span>
+                                            <span>{item.discount > 0 ? `Скидка ${item.discount} %` : ""}</span>
                                         </div>
                                     </div>
                                 );
@@ -78,6 +91,19 @@ function Menu() {
                     </div>
                 </div>
             ))}
+            {selectedItem && (
+                <div className='modal-card' onClick={handleCloseModal}>
+                    <div className='modal-card-content' onClick={(e) => e.stopPropagation()}>
+                        <img src={CONFIG.API_URL + selectedItem.image} alt="foto" />
+                        <h2>{selectedItem.name}</h2>
+                        <p>{selectedItem.description}</p>
+                        <h2>{selectedItem.price} so'm</h2>
+                        {selectedItem.discount > 0 && (
+                            <span>Скидка {selectedItem.discount} %</span>
+                        )}
+                    </div>
+                </div>
+            )}
         </div>
     );
 }
