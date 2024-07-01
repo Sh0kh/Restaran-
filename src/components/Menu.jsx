@@ -18,7 +18,7 @@ function Menu() {
     }, []);
 
     async function getData() {
-        const fetchData = await fetch('https://darxon.onrender.com/api/category');
+        const fetchData = await fetch('http://45.130.148.75:3000/api/category');
         const json = await fetchData.json();
         setX(json);
     }

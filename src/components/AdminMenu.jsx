@@ -448,7 +448,7 @@ function AdminMenu() {
                             />
                         </label>
                         <select  value={iscategory} onChange={(e) => setCategory(e.target.value)}>
-                            <option value="">Select a categ</option>
+                            <option value="">Category</option>
                             {isItemCategory.map((category) => (
                                 <option  key={category.id} value={category.id}>
                                     {category.name}
