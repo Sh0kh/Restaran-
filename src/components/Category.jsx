@@ -21,6 +21,7 @@ function Category() {
             .then((response) => {
                 setCategory(response.data);
                 setCategoriesCount(response.data.length);
+                console.log(response.data);
             })
             .catch((error) => {
                 console.error('Error fetching categories:', error);

@@ -63,14 +63,9 @@ function Menu() {
                     <div className='container'>
                         <div className='main__wrapper'>
                             {filteredCat?.menu?.map((item) => {
-                                const itemDate = new Date(item.createdAt);
-                                const currentDate = new Date();
-                                const differenceInMillis = currentDate - itemDate;
-                                const differenceInDays = differenceInMillis / (1000 * 60 * 60 * 24);
-
                                 return (
                                     <div className='main__card' key={item.id} onClick={() => handleCardClick(item)}>
-                                        {differenceInDays <= 3 ? (
+                                        {item.new <= true ? (
                                             <div className='novin'>
                                                 <span>Новинка</span>
                                             </div>

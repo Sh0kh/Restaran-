@@ -32,6 +32,7 @@ function AdminMenu() {
     const [info, setInfo] = useState('');
     const [iscategory, setCategory] = useState(0);
     const [checked, setChecked] = useState(false);
+    const [checked2, setChecked2] = useState(false);
     const [selectedFile, setSelectedFile] = useState(null);
     const [menuPage, setMenuPage] = useState(1);
     const [currentEditItem, setCurrentEditItem] = useState({
@@ -47,6 +48,10 @@ function AdminMenu() {
         const newChecked = !checked;
         setChecked(newChecked);
     }
+    const handleCheckboxChange2 = () => {
+        const newChecked2 = !checked2;
+        setChecked2(newChecked2);
+    }
     const createMenu = (e) => {
         e.preventDefault();
 
@@ -57,6 +62,7 @@ function AdminMenu() {
             category_id: iscategory,
             discount: discount,
             type:checked,
+            new:checked2,
         };
         const formData = new FormData();
         for (let key of Object.keys(newMenu)) {
@@ -455,7 +461,8 @@ function AdminMenu() {
                                 </option>
                             ))}
                         </select>
-                      <label className='lel' htmlFor="">
+                     <div className='Flex'>
+                     <label className='lel' htmlFor="">
                         <h3>
                             Turi
                         </h3>
@@ -465,6 +472,17 @@ function AdminMenu() {
                       
                       />
                       </label>
+                      <label className='lel' htmlFor="">
+                        <h3>
+                            Yangilik
+                        </h3>
+                      <input 
+                      value={checked2}
+                      onChange={handleCheckboxChange2} type="checkbox" name="" id="" 
+                      
+                      />
+                      </label>
+                     </div>
                         <button type='submit'>
                             Yaratish
                         </button>

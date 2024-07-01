@@ -363,6 +363,17 @@ input[type="checkbox"] {
 .lel input{
     width: 5% !important
 }
+.Flex{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.Flex label{
+    width: 50px !important;
+}
+.Flex input{
+    width: 100% !important;
+}
 @media(max-width:910px){
     .AdminMenu-table {
         overflow: auto;
