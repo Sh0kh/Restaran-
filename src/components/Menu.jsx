@@ -56,7 +56,7 @@ function Menu() {
                 <div className='main'
                     style={{
                         backgroundImage: `url(${CONFIG.API_URL + item.image})`,
-                        height: menuHeight > 3 ? '100vh' : 'auto'
+                        height: menuHeight > 5 ? '100%' : '100vh'
                     }}
                     key={item.id}>
                     <div className='Menu__overflow'></div>
