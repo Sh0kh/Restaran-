@@ -257,8 +257,11 @@ header a:hover{
     header h1{
         font-size: 30px;
     }
+    .main__card h2{
+        font-size: 25px !;
+    }
 }
-@media(max-width:350px){
+@media(max-width:390px){
     .main__card{
         width: 100%;
        }
@@ -266,4 +269,28 @@ header a:hover{
         /* height: 100%; */
         width: 100%;
        }
+}
+@media(max-width:660px){
+    .modal-card img{
+        width: 300px;
+        height: 300px;
+    }
+}
+@media(max-width:630px){
+    .modal-card img{
+        width: 250px !important;
+        height: 250px !important;
+    }
+}
+@media(max-width:340px){
+    .modal-card img{
+        width: 200px !important;
+        height: 200px !important;
+    }
+}
+@media(max-width:240px){
+    .modal-card img{
+        width: 150px !important;
+        height: 150px !important;
+    }
 }
