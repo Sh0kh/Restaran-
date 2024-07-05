@@ -16,8 +16,10 @@ header{
     background-size: cover;
 }
 .Main-card{
+    margin: 0 auto;
     position: relative;
-    height: 280px;
+    height: 310px;
+    width: 310px;
     border-radius: 30px;
     border: 4px solid #A79684;
     cursor: pointer;
@@ -28,8 +30,8 @@ header{
     }
 }
 .Main-card img{
-    width: 100%;
-    height: 100%;
+    width: 300px;
+    height: 300px;
     border-radius: 30px;
     object-fit: cover;
 }
@@ -66,18 +68,31 @@ header{
 }
 .Main-wrapper{
     display: grid;
-    grid-template-columns: repeat(2,1fr);
-    gap: 30px;
+    grid-template-columns: repeat(3,1fr);
+    gap: 20px;
     position: relative;
     z-index: 3;
+}
+@media(max-width:1000px){
+    .Main-wrapper{
+        grid-template-columns: repeat(2,1fr);
+    }
 }
 @media(max-width:760px){
     .Main-wrapper{
         grid-template-columns: repeat(1,1fr);
     }
 }
-@media(max-width:460px){
+@media(max-width:400px){
    .Main-card{
-    height: 150px;
+        width: 260px;
+        height: 260px;
+   }
+   .Main-card img{
+    width: 250px;
+    height: 250px;
+   }
+   .Main-card h2{
+    font-size: 35   xpx;
    }
 }
