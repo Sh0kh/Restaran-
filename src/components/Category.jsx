@@ -50,7 +50,7 @@ function Category() {
                     className='Main'
                     style={{
                         backgroundImage: `url(${CONFIG.API_URL + item.image})`,
-                        height: categoriesCount > 5 ? '100%' : '100vh'
+                        height: categoriesCount >= 5 ? '100%' : '100vh'
                     }}
                     key={index}
                 >

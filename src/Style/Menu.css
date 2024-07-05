@@ -4,6 +4,7 @@ header{
     padding: 20px;
     position: relative;
     z-index: 3;
+
 }
 .Menu{
     background-position: center;
@@ -11,6 +12,7 @@ header{
     background-size: cover;
     /* height: 100vh; */
     position: relative;
+
 }
 .main{
     background-position: center;
@@ -19,6 +21,7 @@ header{
     padding-top : 50px;
     position: relative;
     z-index: 2;
+    padding-bottom: 100px;
 }
 .Menu__overflow{
     position: fixed;
@@ -58,17 +61,19 @@ header a:hover{
     font-size: 50px;
 }
 .main__card{
-    width: 419px;
+    width: 305px;
     /* height: 324px; */
     flex-shrink: 0;
     border-radius: 20px;
     border: 3px solid #A79684;
 }
 .main__card img{
-    width: 100%;
-    height: 350px;
+    display: block;
+    width: 300px;
+    height: 300px;
     object-fit: cover;
     border-radius: 5px;
+    margin: 0 auto;
 }
 .main__card__grid{
     width: 100%;
@@ -115,6 +120,8 @@ header a:hover{
     justify-content: center;
     height: 30px;
     background-color: #A79684;
+    margin-bottom: 0;
+    /* bottom: 0; */
 }
 .novin{
     border-top-left-radius:10px ;
@@ -165,8 +172,11 @@ header a:hover{
 }
 @media(max-width:1400px){
     .modal-card-content img{
-        width: 100%;
-        height: 100%;
+        width: 300px;
+        height: 300px;
+    }
+    .main__card{
+        width: 300px;
     }
 }
 @media(max-width:900px){
@@ -195,7 +205,7 @@ header a:hover{
 }
 @media(max-width:1145px){
     .main__card{
-        width: 300px;
+        width: 305px;
         margin:  0 auto;
     }
     .main__card p{
@@ -210,7 +220,7 @@ header a:hover{
         grid-template-columns: repeat(2,1fr);
     }
     .main__card{
-        width: 400px;
+        width: 305px;
     }
     .main__card p{
         font-size: 20px;
@@ -218,7 +228,7 @@ header a:hover{
 }
 @media(max-width:870px){
     .main__card{
-        width: 350px;
+        width: 310px;
 
     }
 }
@@ -235,11 +245,20 @@ header a:hover{
     grid-template-columns: repeat(1,1fr);
    }
    .main__card{
-    width: 95%;
+    width: 310px;
    }
 }
 @media(max-width:430px){
     header h1{
         font-size: 30px;
     }
+}
+@media(max-width:350px){
+    .main__card{
+        width: 100%;
+       }
+       .main__card img{
+        /* height: 100%; */
+        width: 100%;
+       }
 }

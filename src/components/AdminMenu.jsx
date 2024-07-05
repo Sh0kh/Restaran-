@@ -40,7 +40,8 @@ function AdminMenu() {
         name: '',
         price: '',
         description: '',
-        category_id: 0
+        category_id: 0,
+        new:false
     });
     const [selectedCategory, setSelectedCategory] = useState(0);
     const CategoryPag = 3;
@@ -48,10 +49,7 @@ function AdminMenu() {
         const newChecked = !checked;
         setChecked(newChecked);
     }
-    const handleCheckboxChange2 = () => {
-        const newChecked2 = !checked2;
-        setChecked2(newChecked2);
-    }
+
     const createMenu = (e) => {
         e.preventDefault();
 
@@ -93,6 +91,7 @@ function AdminMenu() {
                 setPrice('')
                 setDiscount('')
                 setSelectedFile(null)
+                window.location.reload();
             })
             .catch((error) => {
                 console.error('Error creating new item:', error.response || error.message);
@@ -138,6 +137,8 @@ function AdminMenu() {
             });
     };
 
+
+    
     const editMenu = (e) => {
         e.preventDefault();
 
@@ -146,10 +147,10 @@ function AdminMenu() {
         formData.append('description', currentEditItem.description);
         formData.append('price', currentEditItem.price);
         formData.append('category_id', currentEditItem.category_id);
+        formData.append('new', currentEditItem.new.toString());
         if (selectedFile) {
             formData.append('image', selectedFile);
         } else {
-            // Если изображение не выбрано, добавляем текущее изображение
             formData.append('image', currentEditItem.image);
         }
         axios.put(`/menu/${currentEditItem.id}`, formData, {
@@ -175,6 +176,7 @@ function AdminMenu() {
                     discount:'',
                     category_id: iscategory,
                 });
+                setChecked2(false);
                 ChangeActive();
                 getAllMenu();
             })
@@ -188,7 +190,14 @@ function AdminMenu() {
                 }).showToast();
             });
     };
-
+    const handleCheckboxChange2 = () => {
+        setChecked2(!checked2);
+        setCurrentEditItem(prevState => ({
+            ...prevState,
+            new: !checked2, 
+        }));
+    };
+    
     const toggleEditModal = (item) => {
         setCurrentEditItem(item);
         ChangeActive();
@@ -207,6 +216,7 @@ function AdminMenu() {
     const getAllMenu = () => {
         axios.get('/menu')
             .then((respons) => {
+                setChecked2(respons.data)
                 setItems(respons.data);
                 setFilteredItems(respons.data);
             })
@@ -243,6 +253,7 @@ function AdminMenu() {
         }
     };
 
+    
     useEffect(() => {
         getAllMenu();
         getAllCategory();
@@ -548,13 +559,22 @@ function AdminMenu() {
                             />
                         </label>
                         <select value={currentEditItem.category_id} onChange={(e) => setCurrentEditItem({ ...currentEditItem, category_id: e.target.value })}>
-                            <option value="">Select a categ</option>
+                            <option value="">Turkum</option>
                             {isItemCategory.map((category) => (
                                 <option key={category.id} value={category.id}>
                                     {category.name}
                                 </option>
                             ))}
                         </select>
+                        <label className='lel' htmlFor="">
+                        <h3>
+                            Yangilik
+                        </h3>
+                      <input 
+                      checked={checked2 === true}
+                      onChange={handleCheckboxChange2} type="checkbox" name="" id="" 
+                      />
+                      </label>
                         <button type='submit'>
                             O'zgartirish
                         </button>

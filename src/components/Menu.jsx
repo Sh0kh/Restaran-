@@ -12,10 +12,6 @@ function Menu() {
     const [menuHeight, setMenuHeight] = useState(0);
     const [selectedItem, setSelectedItem] = useState(null); // State to track the selected item
 
-    useEffect(() => {
-        getData();
-        getBackgroundImage();
-    }, []);
 
     async function getData() {
         const fetchData = await fetch('https://api.darxon-res.uz/api/category');
@@ -27,12 +23,21 @@ function Menu() {
         axios.get('/background')
             .then((response) => {
                 setBackgroundImage(response.data);
-                setMenuHeight(response.data.length);
             })
             .catch((error) => {
                 console.error('Error fetching background image:', error);
             });
     };
+    const getMenu = () =>{
+        axios.get('/menu')
+        .then((respons)=>{
+            setMenuHeight(respons.data)
+            console.log(respons.data);
+        })
+        .catch((error)=>{
+
+        })
+    }
 
     let filteredCat = x?.find((item) => item.id === Number(location.categoryID));
 
@@ -43,7 +48,11 @@ function Menu() {
     const handleCloseModal = () => {
         setSelectedItem(null); // Clear the selected item to close the modal
     };
-
+    useEffect(() => {
+        getData();
+        getBackgroundImage();
+        getMenu()
+    }, []);
     return (
         <div className='Menu'>
             <header>
@@ -56,7 +65,7 @@ function Menu() {
                 <div className='main'
                     style={{
                         backgroundImage: `url(${CONFIG.API_URL + item.image})`,
-                        height: menuHeight > 5 ? '100%' : '100vh'
+                        height: menuHeight  > 3 ? '100%' : '100%'
                     }}
                     key={item.id}>
                     <div className='Menu__overflow'></div>
@@ -65,11 +74,11 @@ function Menu() {
                             {filteredCat?.menu?.map((item) => {
                                 return (
                                     <div className='main__card' key={item.id} onClick={() => handleCardClick(item)}>
-                                        {item.new <= true ? (
                                             <div className='novin'>
+                                        {item.new === true ? (
                                                 <span>Новинка</span>
+                                            ) : null}
                                             </div>
-                                        ) : null}
                                         <img src={CONFIG.API_URL + item.image} alt="foto" />
                                         <div className='main__card__grid'>
                                             <h2>{item.name}</h2>
