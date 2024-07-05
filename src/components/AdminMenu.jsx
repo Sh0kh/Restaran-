@@ -257,8 +257,8 @@ function AdminMenu() {
     useEffect(() => {
         getAllMenu();
         getAllCategory();
+        
     }, []);
-
     return (
         <div className='AdminMenu'>
             <Saidbar />
@@ -571,7 +571,7 @@ function AdminMenu() {
                             Yangilik
                         </h3>
                       <input 
-                      checked={checked2 === true}
+                      checked={checked2 === true ? false : true}
                       onChange={handleCheckboxChange2} type="checkbox" name="" id="" 
                       />
                       </label>
