@@ -171,6 +171,10 @@ header a:hover{
     display: block;
     margin-top: 10px;
 }
+.fotoBig{
+    width: 400px !important;
+    height: 400px !important;
+}
 @media(max-width:1400px){
     .modal-card-content img{
         width: 300px;

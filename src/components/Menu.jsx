@@ -98,7 +98,7 @@ function Menu() {
             {selectedItem && (
                 <div className='modal-card' onClick={handleCloseModal}>
                     <div className='modal-card-content' onClick={(e) => e.stopPropagation()}>
-                        <img src={CONFIG.API_URL + selectedItem.image} alt="foto" />
+                        <img className='fotoBig' src={CONFIG.API_URL + selectedItem.image} alt="foto" />
                         <h2>{selectedItem.name}</h2>
                         <p>{selectedItem.description}</p>
                         <h2>{selectedItem.price} so'm</h2>
