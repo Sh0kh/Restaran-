@@ -61,7 +61,7 @@ function AdminBg() {
 
                 GetBg();
                 Toastify({
-                    text: "Qoshildi",
+                    text: "Ochirildi",
                     duration: 3000,
                     gravity: "top", // `top` or `bottom`
                     position: "right",
