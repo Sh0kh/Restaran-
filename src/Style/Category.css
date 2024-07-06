@@ -62,9 +62,7 @@ header{
 .Main-card h2{
     color: white;
     font-size: 60px;
-    font-style: normal;
-    font-weight: 800;
-    line-height: 15px; /* 25% */
+    text-align: center;
 }
 .Main-wrapper{
     display: grid;
