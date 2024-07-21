@@ -10,7 +10,7 @@ function Menu() {
     const [backgroundImage, setBackgroundImage] = useState([]);
     const [x, setX] = useState(null);
     const [menuHeight, setMenuHeight] = useState(0);
-    const [selectedItem, setSelectedItem] = useState(null); // State to track the selected item
+    // const [selectedItem, setSelectedItem] = useState(null); 
 
 
     async function getData() {
@@ -41,13 +41,13 @@ function Menu() {
 
     let filteredCat = x?.find((item) => item.id === Number(location.categoryID));
 
-    const handleCardClick = (item) => {
-        setSelectedItem(item); // Set the selected item to open the modal
-    };
+    // const handleCardClick = (item) => {
+    //     setSelectedItem(item); 
+    // };
 
-    const handleCloseModal = () => {
-        setSelectedItem(null); // Clear the selected item to close the modal
-    };
+    // const handleCloseModal = () => {
+    //     setSelectedItem(null); 
+    // };
     useEffect(() => {
         getData();
         getBackgroundImage();
@@ -73,17 +73,17 @@ function Menu() {
                         <div className='main__wrapper'>
                             {filteredCat?.menu?.map((item) => {
                                 return (
-                                    <div className='main__card' key={item.id} onClick={() => handleCardClick(item)}>
+                                    <div className='main__card' key={item.id} >
                                             <div className='novin'>
                                         {item.new === true ? (
-                                                <span>Новинка</span>
+                                                <span>Янгилик</span>
                                             ) : null}
                                             </div>
                                         <img src={CONFIG.API_URL + item.image} alt="foto" />
                                         <div className='main__card__grid'>
                                             <h2>{item.name}</h2>
                                             <div className='card__line'></div>
-                                            <h2>{item.price} so'm</h2>
+                                            <h2>{item.price} Сум</h2>
                                         </div>
                                         <div className='discount'>
                                             <span>{item.discount > 0 ? `Скидка ${item.discount} %` : ""}</span>
@@ -95,7 +95,7 @@ function Menu() {
                     </div>
                 </div>
             ))}
-            {selectedItem && (
+         {/*   {selectedItem && (
                 <div className='modal-card' onClick={handleCloseModal}>
                     <div className='modal-card-content' onClick={(e) => e.stopPropagation()}>
                         <img className='fotoBig' src={CONFIG.API_URL + selectedItem.image} alt="foto" />
@@ -108,6 +108,7 @@ function Menu() {
                     </div>
                 </div>
             )}
+              */}
         </div>
     );
 }
