@@ -62,8 +62,8 @@ function AdminMenu() {
             description: info,
             category_id: iscategory,
             discount: discount,
-            type:checked,
-            new:checked2
+            type: checked,
+            new: checked2
         };
         const formData = new FormData();
         for (let key of Object.keys(newMenu)) {
@@ -72,7 +72,6 @@ function AdminMenu() {
         if (selectedFile) {
             formData.append('image', selectedFile);
         }
-        console.log('Form Data:', formData);
         axios.post('/menu', formData, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -83,21 +82,25 @@ function AdminMenu() {
                 Toastify({
                     text: "Qoshildi",
                     duration: 3000,
-                    gravity: "top", // `top` or `bottom`
-                    position: "right", // `left`, `center` or `right`
+                    gravity: "top",
+                    position: "right",
                     backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)",
                 }).showToast();
                 ModalActive();
                 getAllMenu();
-                setCategory('')
-                setInfo('')
-                setMenuName('')
-                setPrice('')
-                setDiscount('')
-                setSelectedFile(null)
+                setCategory('');
+                setInfo('');
+                setMenuName('');
+                setPrice('');
+                setDiscount('');
+                setSelectedFile(null);
                 window.location.reload();
             })
             .catch((error) => {
+                if (error.response && error.response.status === 401) {
+                    localStorage.removeItem('token');
+                    window.location.href = '/login'; 
+                }
                 Toastify({
                     text: "Hato!",
                     duration: 3000,
@@ -107,6 +110,7 @@ function AdminMenu() {
                 }).showToast();
             });
     };
+    
     const handleFileChange = (event) => {
         setSelectedFile(event.target.files[0]);
     };
@@ -128,7 +132,10 @@ function AdminMenu() {
                 getAllMenu();
             })
             .catch((error) => {
-                console.log(error);
+                if (error.response && error.response.status === 401) {
+                    localStorage.removeItem('token');
+                    window.location.href = '/login'; 
+                }
                 Toastify({
                     text: "Hato!",
                     duration: 3000,
@@ -203,6 +210,10 @@ function AdminMenu() {
                 getAllMenu();
             })
             .catch((error) => {
+                if (error.response && error.response.status === 401) {
+                    localStorage.removeItem('token');
+                    window.location.href = '/login'; 
+                }
                 Toastify({
                     text: "Hato!",
                     duration: 3000,
@@ -463,7 +474,7 @@ function AdminMenu() {
                             <textarea
                                 value={info}
                                 onChange={(e) => setInfo(e.target.value)}
-                                required
+                                
                                 id="productText"
                                 className="menu-info"
                                 cols=""

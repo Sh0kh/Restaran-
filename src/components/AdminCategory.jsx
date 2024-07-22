@@ -62,6 +62,10 @@ function AdminCategory() {
             setSelectedFile(null)
         })
         .catch((error) => {
+            if (error.response && error.response.status === 401) {
+                localStorage.removeItem('token');
+                window.location.href = '/login'; 
+            }
             Toastify({
                 text: "Hato!",
                 duration: 3000,
@@ -103,6 +107,10 @@ function AdminCategory() {
             getAllCategory();
         })
         .catch((error) => {
+            if (error.response && error.response.status === 401) {
+                localStorage.removeItem('token');
+                window.location.href = '/login'; 
+            }
             Toastify({
                 text: "Hato!",
                 duration: 3000,
@@ -147,6 +155,10 @@ function AdminCategory() {
             ChangeActive()
         })
         .catch((error) => {
+            if (error.response && error.response.status === 401) {
+                localStorage.removeItem('token');
+                window.location.href = '/login'; 
+            }
             Toastify({
                 text: "Hato!",
                 duration: 3000,

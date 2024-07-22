@@ -37,10 +37,12 @@ function AdminBg() {
                     position: "right",
                     backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)",
                 }).showToast();
-                console.log(selectedFile);
             })
             .catch((error) => {
-                console.log(error);
+                if (error.response && error.response.status === 401) {
+                    localStorage.removeItem('token');
+                    window.location.href = '/login'; 
+                }
                 Toastify({
                     text: "Hato!",
                     duration: 3000,
@@ -69,6 +71,10 @@ function AdminBg() {
                 }).showToast();
             })
             .catch((error) => {
+                if (error.response && error.response.status === 401) {
+                    localStorage.removeItem('token');
+                    window.location.href = '/login'; 
+                }
                 Toastify({
                     text: "Hato!",
                     duration: 3000,
