@@ -173,7 +173,6 @@ function AdminMenu() {
         } else {
             formData.append('image', currentEditItem.image);
         }
-        console.log(currentEditItem.new);
         axios.put(`/menu/${currentEditItem.id}`, formData, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`,
