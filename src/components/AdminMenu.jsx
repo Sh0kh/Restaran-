@@ -33,6 +33,7 @@ function AdminMenu() {
     const [iscategory, setCategory] = useState(0);
     const [checked, setChecked] = useState(false);
     const [checked2, setChecked2] = useState(false);
+    const [isChecked3, setIsChecked3] = useState(false);
     const [selectedFile, setSelectedFile] = useState(null);
     const [menuPage, setMenuPage] = useState(1);
     const [currentEditItem, setCurrentEditItem] = useState({
@@ -49,10 +50,12 @@ function AdminMenu() {
         const newChecked = !checked;
         setChecked(newChecked);
     }
-
+    const handleCheckboxChange2 = () => {
+        setChecked2(true);
+    };
+ 
     const createMenu = (e) => {
         e.preventDefault();
-
         const newMenu = {
             name: menuName,
             price: price,
@@ -60,15 +63,16 @@ function AdminMenu() {
             category_id: iscategory,
             discount: discount,
             type:checked,
-            new:checked2,
+            new:checked2
         };
         const formData = new FormData();
         for (let key of Object.keys(newMenu)) {
-            formData.append(key, newMenu[key]);
+            formData.append(key, newMenu[key] === true ? 'true' : newMenu[key] === false ? 'false' : newMenu[key]);
         }
         if (selectedFile) {
             formData.append('image', selectedFile);
         }
+        console.log('Form Data:', formData);
         axios.post('/menu', formData, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -94,7 +98,6 @@ function AdminMenu() {
                 window.location.reload();
             })
             .catch((error) => {
-                console.error('Error creating new item:', error.response || error.message);
                 Toastify({
                     text: "Hato!",
                     duration: 3000,
@@ -104,7 +107,6 @@ function AdminMenu() {
                 }).showToast();
             });
     };
-
     const handleFileChange = (event) => {
         setSelectedFile(event.target.files[0]);
     };
@@ -137,8 +139,26 @@ function AdminMenu() {
             });
     };
 
-
-    
+        const getAllMenu = () => {
+            axios.get('/menu')
+                .then((respons) => {
+                    const newValue = respons.data.new
+                    // console.log(respons.data.new);
+                    setIsChecked3(newValue);
+                    setItems(respons.data);
+                    setFilteredItems(respons.data);
+                })
+                .catch((error) => {
+                    console.error('Error fetching menu items:', error);
+                });
+        };
+        const handleCheckboxChange3 = () => {
+            setIsChecked3(false); 
+            setCurrentEditItem(prevState => ({
+                ...prevState,
+                new: false 
+            }));
+        };
     const editMenu = (e) => {
         e.preventDefault();
 
@@ -147,18 +167,20 @@ function AdminMenu() {
         formData.append('description', currentEditItem.description);
         formData.append('price', currentEditItem.price);
         formData.append('category_id', currentEditItem.category_id);
-        formData.append('new', currentEditItem.new.toString());
+        formData.append('new', currentEditItem.new);
         if (selectedFile) {
             formData.append('image', selectedFile);
         } else {
             formData.append('image', currentEditItem.image);
         }
+        console.log(currentEditItem.new);
         axios.put(`/menu/${currentEditItem.id}`, formData, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`,
                 'Content-Type': 'multipart/form-data',
             },
         })
+
             .then((response) => {
                 Toastify({
                     text: "Ozgartirildi",
@@ -174,9 +196,10 @@ function AdminMenu() {
                     price: '',
                     description: '',
                     discount:'',
+                    new:false,
                     category_id: iscategory,
                 });
-                setChecked2(false);
+                setIsChecked3(false);
                 ChangeActive();
                 getAllMenu();
             })
@@ -190,13 +213,7 @@ function AdminMenu() {
                 }).showToast();
             });
     };
-    const handleCheckboxChange2 = () => {
-        setChecked2(!checked2);
-        setCurrentEditItem(prevState => ({
-            ...prevState,
-            new: !checked2, 
-        }));
-    };
+ 
     
     const toggleEditModal = (item) => {
         setCurrentEditItem(item);
@@ -213,17 +230,7 @@ function AdminMenu() {
             });
     };
 
-    const getAllMenu = () => {
-        axios.get('/menu')
-            .then((respons) => {
-                setChecked2(respons.data)
-                setItems(respons.data);
-                setFilteredItems(respons.data);
-            })
-            .catch((error) => {
-                console.error('Error fetching menu items:', error);
-            });
-    };
+   
 
     const filterByCategory = (categoryId) => {
         setSelectedCategory(categoryId);
@@ -488,9 +495,7 @@ function AdminMenu() {
                             Yangilik
                         </h3>
                       <input 
-                      value={checked2}
                       onChange={handleCheckboxChange2} type="checkbox" name="" id="" 
-                      
                       />
                       </label>
                      </div>
@@ -571,8 +576,8 @@ function AdminMenu() {
                             Yangilik
                         </h3>
                       <input 
-                      checked={checked2 === true ? false : true}
-                      onChange={handleCheckboxChange2} type="checkbox" name="" id="" 
+                      checked={currentEditItem.new}
+                      onChange={handleCheckboxChange3} type="checkbox" name="" id="" 
                       />
                       </label>
                         <button type='submit'>
