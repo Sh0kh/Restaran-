@@ -152,13 +152,13 @@ function AdminMenu() {
                     console.error('Error fetching menu items:', error);
                 });
         };
-        const handleCheckboxChange3 = () => {
-            setIsChecked3(false); 
-            setCurrentEditItem(prevState => ({
-                ...prevState,
-                new: false 
-            }));
-        };
+        // const handleCheckboxChange3 = () => {
+        //     setIsChecked3(false); 
+        //     setCurrentEditItem(prevState => ({
+        //         ...prevState,
+        //         new: false 
+        //     }));
+        // };
     const editMenu = (e) => {
         e.preventDefault();
 
@@ -577,7 +577,7 @@ function AdminMenu() {
                         </h3>
                       <input 
                       checked={currentEditItem.new}
-                      onChange={handleCheckboxChange3} type="checkbox" name="" id="" 
+                      onChange={(e) => setCurrentEditItem({ ...currentEditItem, new: e.target.checked })} type="checkbox" name="" id="" 
                       />
                       </label>
                         <button type='submit'>
