@@ -67,6 +67,7 @@ header a:hover{
     border-radius: 20px;
     border: 3px solid #A79684;
     margin: 0 auto;
+    /* height: fit-content; */
 }
 .main__card img{
     display: block;
@@ -86,8 +87,6 @@ header a:hover{
     font-size: 30px;
     font-style: normal;
     font-weight: 800;
-    line-height: 15px; /* 50% */
-    /* margin: 10px 0; */
     text-align: center;
 }
 .card__line{
@@ -113,16 +112,21 @@ header a:hover{
 }
 .discount{
     z-index: 1000;
-    /* position: absolute; */
+    position: absolute;
     border-bottom-left-radius:10px ;
     border-bottom-right-radius:10px ;
     display: flex;
     align-items: center;
     justify-content: center;
     height: 30px;
+    width: 100%;
+    bottom: 0;
+    margin-top: 10px;
     background-color: #A79684;
     margin-bottom: 0;
-    /* bottom: 0; */
+}
+.card__price{
+    margin-bottom: 20px;
 }
 .novin{
     border-top-left-radius:10px ;
@@ -175,6 +179,8 @@ header a:hover{
     width: 400px !important;
     height: 400px !important;
 }
+
+
 @media(max-width:1400px){
     .modal-card-content img{
         width: 300px;

@@ -14,6 +14,7 @@ header{
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    
 }
 .Main-card{
     margin: 0 auto;
@@ -43,12 +44,14 @@ header{
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 5px;
 }
 .Main{
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     padding-top: 50px;
+    padding-bottom: 50px;
     position: relative;
     z-index: 2;
     /* height: 100%; */
@@ -61,7 +64,7 @@ header{
 }
 .Main-card h2{
     color: white;
-    font-size: 60px;
+    font-size: 30px;
     text-align: center;
 }
 .Main-wrapper{

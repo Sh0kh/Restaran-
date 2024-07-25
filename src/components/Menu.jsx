@@ -83,7 +83,7 @@ function Menu() {
                                         <div className='main__card__grid'>
                                             <h2>{item.name}</h2>
                                             <div className='card__line'></div>
-                                            <h2>{item.price} Сум</h2>
+                                            <h2 className='card__price'>{item.price} Сум</h2>
                                         </div>
                                         <div className='discount'>
                                             <span>{item.discount > 0 ? `Скидка ${item.discount} %` : ""}</span>
