@@ -7,7 +7,8 @@ import axios from '../Service/axios';
 import CONFIG from '../store/config';
 import Toastify from 'toastify-js';
 import "toastify-js/src/toastify.css";
-
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
 function AdminMenu() {
     const [isActive, setActive] = useState(null);
     const [isModal, setModal] = useState(null);
@@ -295,10 +296,18 @@ function AdminMenu() {
                 </div>
                 <div className='AdminMenu-main '>
                     <div className='AdminMenu-main-category'>
-                        {isItemCategory.map((item, index) => (
-                            <button key={index} onClick={() => filterByCategory(item.id)} className={selectedCategory === item.id ? 'active2' : ''}>{item.name}</button>
+                        
+                                            <Swiper
+      spaceBetween={50}
+      slidesPerView={3}
+    >
+
+      {isItemCategory.map((item, index) => (
+                            <SwiperSlide> <button key={index} onClick={() => filterByCategory(item.id)} className={selectedCategory === item.id ? 'active2' : ''}>{item.name}</button></SwiperSlide>
                         ))}
+    </Swiper>
                     </div>
+
                     <div className='AdminMenu-table'>
                         <table>
                             <thead>

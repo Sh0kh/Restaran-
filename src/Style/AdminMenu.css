@@ -374,6 +374,22 @@ input[type="checkbox"] {
 .Flex input{
     width: 100% !important;
 }
+.AdminMenu-main-category{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.AdminMenu-main-category button{
+    margin: 0 auto;
+}
+.swiper-slide{
+    /* width: 150px ; */
+}
+.swiper-wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
 @media(max-width:910px){
     .AdminMenu-table {
         overflow: auto;
