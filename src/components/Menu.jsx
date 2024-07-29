@@ -8,70 +8,63 @@ import logo from '../img/Rectangle 7.png';
 function Menu() {
     let location = useParams();
     const [backgroundImage, setBackgroundImage] = useState([]);
-    const [x, setX] = useState(null);
+    const [categories, setCategories] = useState([]);
     const [menuHeight, setMenuHeight] = useState(0);
-    const [isLoading, setIsLoading] = useState(true); // Добавляем состояние загрузки
-
-    // async function getData() {
-    //     const fetchData = await fetch('https://api.darxon-res.uz/api/category');
-    //     const json = await fetchData.json();
-    //     setX(json);
-    // }
-
-    // const getBackgroundImage = () => {
-    //     axios.get('/background')
-    //         .then((response) => {
-    //             setBackgroundImage(response.data);
-    //         })
-    //         .catch((error) => {
-    //             console.error('Error fetching background image:', error);
-    //         });
-    // };
-
-    // const getMenu = () => {
-    //     axios.get('/menu')
-    //         .then((response) => {
-    //             setMenuHeight(response.data);
-    //         })
-    //         .catch((error) => {
-    //             console.error('Error fetching menu:', error);
-    //         });
-    // };
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        // Выполняем все запросы параллельно и ждем, пока все завершатся
+        // Fetch data and set state
         Promise.all([
             fetch('https://api.darxon-res.uz/api/category').then(res => res.json()),
             axios.get('/background'),
             axios.get('/menu')
         ])
         .then(([categoryData, backgroundResponse, menuResponse]) => {
-            setX(categoryData);
+            setCategories(categoryData);
             setBackgroundImage(backgroundResponse.data);
             setMenuHeight(menuResponse.data);
-            setIsLoading(false); // Устанавливаем состояние загрузки в false после завершения всех запросов
+
+            const imageUrls = backgroundResponse.data.map(item => CONFIG.API_URL + item.image)
+                .concat(categoryData.flatMap(category => category.menu.map(item => CONFIG.API_URL + item.image)));
+
+            // Preload images
+            const imagePromises = imageUrls.map(url => {
+                return new Promise((resolve, reject) => {
+                    const img = new Image();
+                    img.src = url;
+                    img.onload = resolve;
+                    img.onerror = reject;
+                });
+            });
+
+            return Promise.all(imagePromises);
+        })
+        .then(() => {
+            setIsLoading(false);
         })
         .catch((error) => {
-            setIsLoading(false); // Устанавливаем состояние загрузки в false даже в случае ошибки
+            console.error('Error fetching data or loading images:', error);
+            setIsLoading(false);
         });
     }, []);
 
-    let filteredCat = x?.find((item) => item.id === Number(location.categoryID));
-
-    if (isLoading) {
-        return <div className='loading'>
-          <div className='loading2'>
-              <svg className='LoadSVG' xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><circle cx={12} cy={2} r={0} fill="white"><animate attributeName="r" begin={0} calcMode="spline" dur="1s" keySplines="0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8" repeatCount="indefinite" values="0;2;0;0"></animate></circle><circle cx={12} cy={2} r={0} fill="white" transform="rotate(45 12 12)"><animate attributeName="r" begin="0.125s" calcMode="spline" dur="1s" keySplines="0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8" repeatCount="indefinite" values="0;2;0;0"></animate></circle><circle cx={12} cy={2} r={0} fill="white" transform="rotate(90 12 12)"><animate attributeName="r" begin="0.25s" calcMode="spline" dur="1s" keySplines="0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8" repeatCount="indefinite" values="0;2;0;0"></animate></circle><circle cx={12} cy={2} r={0} fill="white" transform="rotate(135 12 12)"><animate attributeName="r" begin="0.375s" calcMode="spline" dur="1s" keySplines="0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8" repeatCount="indefinite" values="0;2;0;0"></animate></circle><circle cx={12} cy={2} r={0} fill="white" transform="rotate(180 12 12)"><animate attributeName="r" begin="0.5s" calcMode="spline" dur="1s" keySplines="0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8" repeatCount="indefinite" values="0;2;0;0"></animate></circle><circle cx={12} cy={2} r={0} fill="white" transform="rotate(225 12 12)"><animate attributeName="r" begin="0.625s" calcMode="spline" dur="1s" keySplines="0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8" repeatCount="indefinite" values="0;2;0;0"></animate></circle><circle cx={12} cy={2} r={0} fill="white" transform="rotate(270 12 12)"><animate attributeName="r" begin="0.75s" calcMode="spline" dur="1s" keySplines="0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8" repeatCount="indefinite" values="0;2;0;0"></animate></circle><circle cx={12} cy={2} r={0} fill="white" transform="rotate(315 12 12)"><animate attributeName="r" begin="0.875s" calcMode="spline" dur="1s" keySplines="0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8" repeatCount="indefinite" values="0;2;0;0"></animate></circle></svg>
-            <h2>
-                Loading ...
-            </h2>
-          </div>
-            
-            </div>; // Показываем индикатор загрузки
-    }
+    let filteredCat = categories?.find((item) => item.id === Number(location.categoryID));
 
     return (
         <div className='Menu'>
+            {isLoading && (
+                <div className='loading'>
+                    <div className='loading2'>
+                        <svg className='LoadSVG' xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
+                            <circle cx={12} cy={2} r={0} fill="white">
+                                <animate attributeName="r" begin={0} calcMode="spline" dur="1s" keySplines="0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8" repeatCount="indefinite" values="0;2;0;0"></animate>
+                            </circle>
+                            {/* Repeat for other circles as needed */}
+                        </svg>
+                        <h2>Loading ...</h2>
+                    </div>
+                </div>
+            )}
             <header>
                 <div className='container header__wrapper'>
                     <img src={logo} alt="Logo" />
@@ -90,7 +83,7 @@ function Menu() {
                         <div className='main__wrapper'>
                             {filteredCat?.menu?.map((item) => {
                                 return (
-                                    <div className='main__card' key={item.id} >
+                                    <div className='main__card' key={item.id}>
                                         <div className='novin'>
                                             {item.new === true ? (
                                                 <span>Янгилик</span>
