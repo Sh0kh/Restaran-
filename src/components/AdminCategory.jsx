@@ -27,6 +27,7 @@ function AdminCategory() {
     const [isItemCategory, setItemCategory] = useState([])
     const [currentPage, setCurrentPage] = useState(1);
     const [currentEditItem, setCurrentEditItem] = useState({ id: '', name: '' });
+    const [sort, SetSort] = useState(0)
     const CategoryPag = 3;
 
     const createCategory = (e) =>{
@@ -34,6 +35,7 @@ function AdminCategory() {
 
         const newCategory = {
             name: isCategoryName,
+            sort:sort
         }
         const formData = new FormData();
         for (let key of Object.keys(newCategory)) {
@@ -59,6 +61,7 @@ function AdminCategory() {
             ModalActive();
             getAllCategory(); 
             setCategoryName('')
+            SetSort(0)
             setSelectedFile(null)
         })
         .catch((error) => {
@@ -126,6 +129,7 @@ function AdminCategory() {
 
         const formData = new FormData();
         formData.append('name', currentEditItem.name);
+        formData.append('sort', currentEditItem.sort);
         if (selectedFile) {
             formData.append('image', selectedFile);
         } else {
@@ -150,6 +154,7 @@ function AdminCategory() {
             setCurrentEditItem({
                 id: '',
                 name: '',
+                sort:'',
                 img: selectedFile, // Удаляем изображение из состояния после успешного редактирования
             });
             ChangeActive()
@@ -230,6 +235,11 @@ function AdminCategory() {
                                     </th>
                                     <th>
                                         <h3>
+                                            Raqam
+                                        </h3>
+                                    </th>
+                                    <th>
+                                        <h3>
                                             Sozlama
                                         </h3>
                                     </th>
@@ -244,6 +254,11 @@ function AdminCategory() {
                                      <td>
                                          <h3>
                                              {isItemCategory.name}
+                                         </h3>
+                                     </td>
+                                     <td>
+                                         <h3>
+                                             {isItemCategory.sort}
                                          </h3>
                                      </td>
                                      <td>
@@ -317,6 +332,15 @@ function AdminCategory() {
                              onChange={(e) => setCategoryName(e.target.value)}
                             required id='name' type="text" />
                         </label>
+                        <label htmlFor="s">
+                            <h3>
+                                Raqam
+                            </h3>
+                            <input 
+                             value={sort}
+                             onChange={(e) => SetSort(e.target.value)}
+                            required id='s' type="text" />
+                        </label>
                         <div className="modal-foto">
                             <h3>Фото</h3>
                             <label className="file-input-container" htmlFor="photo">
@@ -351,6 +375,15 @@ function AdminCategory() {
                               value={currentEditItem.name}
                               onChange={(e) => setCurrentEditItem({ ...currentEditItem, name: e.target.value })}
                               required id='name' type="text" />
+                        </label>
+                        <label htmlFor="s">
+                            <h3>
+                                Raqam
+                            </h3>
+                            <input 
+                              value={currentEditItem.sort}
+                              onChange={(e) => setCurrentEditItem({ ...currentEditItem, sort:e.target.value })}
+                              required id='s' type="text" />
                         </label>
                         <div className="modal-foto">
                             <h3>Фото</h3>

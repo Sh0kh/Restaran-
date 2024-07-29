@@ -341,11 +341,7 @@ function AdminMenu() {
                                             Turi 
                                         </h3>
                                     </th>
-                                    <th>
-                                        <h3>
-                                            Info
-                                        </h3>
-                                    </th>
+                                  
                                     <th>
                                         <h3>
                                             Sozlama
@@ -384,11 +380,7 @@ function AdminMenu() {
                                                 {i.type === true ? "Katta" : 'Odiy'}
                                             </h3>
                                         </td>
-                                        <td>
-                                            <p>
-                                                {i.description}
-                                            </p>
-                                        </td>
+                                        
                                         <td>
                                             <div>
                                                 <button class="delete" onClick={() => deleteMenu(i.id)}>
