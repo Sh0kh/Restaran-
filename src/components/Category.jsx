@@ -5,14 +5,14 @@ import logo from '../img/Rectangle 7.png';
 import { NavLink } from 'react-router-dom';
 import CONFIG from '../store/config';
 import '../Style/Admin.css';
-
+import foto from '../img/images (1).jpg'
 function Category() {
     const [category, setCategory] = useState([]);
     const [backgroundImage, setBackgroundImage] = useState([]);
     const [categoriesCount, setCategoriesCount] = useState(0);
     const [isLoading, setIsLoading] = useState(true); // Состояние загрузки
     const [error, setError] = useState(null); // Состояние ошибки
-
+    const defaultImage = foto; 
     useEffect(() => {
         Promise.all([
             axios.get('/category'),
@@ -30,6 +30,11 @@ function Category() {
             setIsLoading(false);
         });
     }, []);
+    const [loadedImages, setLoadedImages] = useState({});
+
+    const handleImageLoad = (id) => {
+        setLoadedImages((prev) => ({ ...prev, [id]: true }));
+    };
 
     if (isLoading) {
         return (
@@ -78,7 +83,11 @@ function Category() {
                                 {category.map((cat) => (
                                     <NavLink to={`/Menu/${cat.id}`} key={cat.id}>
                                         <div className='Main-card'>
-                                            <img src={CONFIG.API_URL + cat.image} alt="Category" />
+                                        <img
+                            src={loadedImages[cat.id] ? CONFIG.API_URL + cat.image : defaultImage}
+                            alt="Category"
+                            onLoad={() => handleImageLoad(cat.id)}
+                        />
                                             <div className='card-over'>
                                                 <h2>{cat.name}</h2>
                                             </div>

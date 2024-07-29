@@ -4,7 +4,7 @@ import CONFIG from '../store/config';
 import { NavLink, useParams } from 'react-router-dom';
 import axios from '../Service/axios';
 import logo from '../img/Rectangle 7.png';
-
+import foto from '../img/images (1).jpg'
 function Menu() {
     let location = useParams();
     const [backgroundImage, setBackgroundImage] = useState([]);
@@ -12,7 +12,7 @@ function Menu() {
     const [menuHeight, setMenuHeight] = useState(0);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
-
+    const defaultImage = foto; 
     useEffect(() => {
         // Set up a timeout to hide the loading spinner after 5 seconds
 
@@ -51,6 +51,11 @@ function Menu() {
             setIsLoading(false);
         });
     }, []);
+    const [loadedImages, setLoadedImages] = useState({});
+
+    const handleImageLoad = (id) => {
+        setLoadedImages((prev) => ({ ...prev, [id]: true }));
+    };
 
     let filteredCat = categories?.find((item) => item.id === Number(location.categoryID));
 
@@ -101,7 +106,11 @@ function Menu() {
                                     <div className='novin'>
                                         {item.new === true && <span>Янгилик</span>}
                                     </div>
-                                    <img src={CONFIG.API_URL + item.image} alt="foto" />
+                                    <img
+                            src={loadedImages[item.id] ? CONFIG.API_URL + item.image : defaultImage}
+                            alt="Category"
+                            onLoad={() => handleImageLoad(item.id)}
+                        />
                                     <div className='main__card__grid'>
                                         <h2>{item.name}</h2>
                                         <div className='card__line'></div>
