@@ -10,54 +10,71 @@ function Menu() {
     const [backgroundImage, setBackgroundImage] = useState([]);
     const [x, setX] = useState(null);
     const [menuHeight, setMenuHeight] = useState(0);
-    // const [selectedItem, setSelectedItem] = useState(null); 
+    const [isLoading, setIsLoading] = useState(true); // Добавляем состояние загрузки
 
+    // async function getData() {
+    //     const fetchData = await fetch('https://api.darxon-res.uz/api/category');
+    //     const json = await fetchData.json();
+    //     setX(json);
+    // }
 
-    async function getData() {
-        const fetchData = await fetch('https://api.darxon-res.uz/api/category');
-        const json = await fetchData.json();
-        setX(json);
-    }
+    // const getBackgroundImage = () => {
+    //     axios.get('/background')
+    //         .then((response) => {
+    //             setBackgroundImage(response.data);
+    //         })
+    //         .catch((error) => {
+    //             console.error('Error fetching background image:', error);
+    //         });
+    // };
 
-    const getBackgroundImage = () => {
-        axios.get('/background')
-            .then((response) => {
-                setBackgroundImage(response.data);
-            })
-            .catch((error) => {
-                console.error('Error fetching background image:', error);
-            });
-    };
-    const getMenu = () =>{
-        axios.get('/menu')
-        .then((respons)=>{
-            setMenuHeight(respons.data)
-            console.log(respons.data);
+    // const getMenu = () => {
+    //     axios.get('/menu')
+    //         .then((response) => {
+    //             setMenuHeight(response.data);
+    //         })
+    //         .catch((error) => {
+    //             console.error('Error fetching menu:', error);
+    //         });
+    // };
+
+    useEffect(() => {
+        // Выполняем все запросы параллельно и ждем, пока все завершатся
+        Promise.all([
+            fetch('https://api.darxon-res.uz/api/category').then(res => res.json()),
+            axios.get('/background'),
+            axios.get('/menu')
+        ])
+        .then(([categoryData, backgroundResponse, menuResponse]) => {
+            setX(categoryData);
+            setBackgroundImage(backgroundResponse.data);
+            setMenuHeight(menuResponse.data);
+            setIsLoading(false); // Устанавливаем состояние загрузки в false после завершения всех запросов
         })
-        .catch((error)=>{
-
-        })
-    }
+        .catch((error) => {
+            setIsLoading(false); // Устанавливаем состояние загрузки в false даже в случае ошибки
+        });
+    }, []);
 
     let filteredCat = x?.find((item) => item.id === Number(location.categoryID));
 
-    // const handleCardClick = (item) => {
-    //     setSelectedItem(item); 
-    // };
+    if (isLoading) {
+        return <div className='loading'>
+          <div className='loading2'>
+              <svg className='LoadSVG' xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><circle cx={12} cy={2} r={0} fill="white"><animate attributeName="r" begin={0} calcMode="spline" dur="1s" keySplines="0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8" repeatCount="indefinite" values="0;2;0;0"></animate></circle><circle cx={12} cy={2} r={0} fill="white" transform="rotate(45 12 12)"><animate attributeName="r" begin="0.125s" calcMode="spline" dur="1s" keySplines="0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8" repeatCount="indefinite" values="0;2;0;0"></animate></circle><circle cx={12} cy={2} r={0} fill="white" transform="rotate(90 12 12)"><animate attributeName="r" begin="0.25s" calcMode="spline" dur="1s" keySplines="0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8" repeatCount="indefinite" values="0;2;0;0"></animate></circle><circle cx={12} cy={2} r={0} fill="white" transform="rotate(135 12 12)"><animate attributeName="r" begin="0.375s" calcMode="spline" dur="1s" keySplines="0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8" repeatCount="indefinite" values="0;2;0;0"></animate></circle><circle cx={12} cy={2} r={0} fill="white" transform="rotate(180 12 12)"><animate attributeName="r" begin="0.5s" calcMode="spline" dur="1s" keySplines="0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8" repeatCount="indefinite" values="0;2;0;0"></animate></circle><circle cx={12} cy={2} r={0} fill="white" transform="rotate(225 12 12)"><animate attributeName="r" begin="0.625s" calcMode="spline" dur="1s" keySplines="0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8" repeatCount="indefinite" values="0;2;0;0"></animate></circle><circle cx={12} cy={2} r={0} fill="white" transform="rotate(270 12 12)"><animate attributeName="r" begin="0.75s" calcMode="spline" dur="1s" keySplines="0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8" repeatCount="indefinite" values="0;2;0;0"></animate></circle><circle cx={12} cy={2} r={0} fill="white" transform="rotate(315 12 12)"><animate attributeName="r" begin="0.875s" calcMode="spline" dur="1s" keySplines="0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8" repeatCount="indefinite" values="0;2;0;0"></animate></circle></svg>
+            <h2>
+                Loading ...
+            </h2>
+          </div>
+            
+            </div>; // Показываем индикатор загрузки
+    }
 
-    // const handleCloseModal = () => {
-    //     setSelectedItem(null); 
-    // };
-    useEffect(() => {
-        getData();
-        getBackgroundImage();
-        getMenu()
-    }, []);
     return (
         <div className='Menu'>
             <header>
                 <div className='container header__wrapper'>
-                    <img src={logo} alt="" />
+                    <img src={logo} alt="Logo" />
                     <NavLink to="/">Ortga</NavLink>
                 </div>
             </header>
@@ -65,7 +82,7 @@ function Menu() {
                 <div className='main'
                     style={{
                         backgroundImage: `url(${CONFIG.API_URL + item.image})`,
-                        height: menuHeight  > 3 ? '100%' : '100%'
+                        height: menuHeight > 3 ? '100%' : '100%'
                     }}
                     key={item.id}>
                     <div className='Menu__overflow'></div>
@@ -74,11 +91,11 @@ function Menu() {
                             {filteredCat?.menu?.map((item) => {
                                 return (
                                     <div className='main__card' key={item.id} >
-                                            <div className='novin'>
-                                        {item.new === true ? (
+                                        <div className='novin'>
+                                            {item.new === true ? (
                                                 <span>Янгилик</span>
                                             ) : null}
-                                            </div>
+                                        </div>
                                         <img src={CONFIG.API_URL + item.image} alt="foto" />
                                         <div className='main__card__grid'>
                                             <h2>{item.name}</h2>
@@ -95,20 +112,6 @@ function Menu() {
                     </div>
                 </div>
             ))}
-         {/*   {selectedItem && (
-                <div className='modal-card' onClick={handleCloseModal}>
-                    <div className='modal-card-content' onClick={(e) => e.stopPropagation()}>
-                        <img className='fotoBig' src={CONFIG.API_URL + selectedItem.image} alt="foto" />
-                        <h2>{selectedItem.name}</h2>
-                        <p>{selectedItem.description}</p>
-                        <h2>{selectedItem.price} so'm</h2>
-                        {selectedItem.discount > 0 && (
-                            <span>Скидка {selectedItem.discount} %</span>
-                        )}
-                    </div>
-                </div>
-            )}
-              */}
         </div>
     );
 }

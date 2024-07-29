@@ -27,3 +27,17 @@ body{
   background:#A79684;
   border-radius: 15px;
 }
+.loading{
+  position: fixed;
+  inset: 0;
+  background-color: #A79684;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.LoadSVG{
+  font-size: 30px;
+}
+.loading2{
+  text-align: center;
+}
