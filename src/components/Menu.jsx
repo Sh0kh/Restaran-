@@ -10,7 +10,7 @@ function Menu() {
     const [backgroundImage, setBackgroundImage] = useState([]);
     const [categories, setCategories] = useState([]);
     const [menuHeight, setMenuHeight] = useState(0);
-    const [isLoading, setIsLoading] = useState(true);
+    // const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
     const defaultImage = foto; 
     useEffect(() => {
@@ -27,29 +27,11 @@ function Menu() {
             setBackgroundImage(backgroundResponse.data);
             setMenuHeight(menuResponse.data.length);
 
-            // Preload images
-            const imageUrls = backgroundResponse.data.map(item => CONFIG.API_URL + item.image)
-                .concat(categoryData.flatMap(category => category.menu.map(item => CONFIG.API_URL + item.image)));
-
-            const imagePromises = imageUrls.map(url => {
-                return new Promise((resolve, reject) => {
-                    const img = new Image();
-                    img.src = url;
-                    img.onload = resolve;
-                    img.onerror = reject;
-                });
-            });
-
-            return Promise.all(imagePromises);
         })
         .catch((error) => {
             console.error("Error fetching data:", error);
             setError(error);
         })
-        .finally(() => {
-             // Clear the timeout if data is loaded before 5 seconds
-            setIsLoading(false);
-        });
     }, []);
     const [loadedImages, setLoadedImages] = useState({});
 
@@ -59,29 +41,6 @@ function Menu() {
 
     let filteredCat = categories?.find((item) => item.id === Number(location.categoryID));
 
-    if (isLoading) {
-        return (
-            <div className='loading'>
-                <div className='loading2'>
-                    <svg className='LoadSVG' xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
-                        <circle cx={12} cy={2} r={0} fill="white">
-                            <animate attributeName="r" begin={0} calcMode="spline" dur="1s" keySplines="0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8" repeatCount="indefinite" values="0;2;0;0"></animate>
-                        </circle>
-                        {/* Repeat for other circles as needed */}
-                    </svg>
-                    <h2>Loading ...</h2>
-                </div>
-            </div>
-        );
-    }
-
-    if (error) {
-        return (
-            <div className='error'>
-                <h2>Ошибка загрузки данных. Попробуйте снова позже.</h2>
-            </div>
-        );
-    }
 
     return (
         <div className='Menu'>

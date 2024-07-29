@@ -41,3 +41,9 @@ body{
 .loading2{
   text-align: center;
 }
+.Grid{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}

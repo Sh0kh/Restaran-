@@ -7,8 +7,8 @@ import axios from '../Service/axios';
 import CONFIG from '../store/config';
 import Toastify from 'toastify-js';
 import "toastify-js/src/toastify.css";
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
+// import { Swiper, SwiperSlide } from 'swiper/react';
+// import 'swiper/css';
 function AdminMenu() {
     const [isActive, setActive] = useState(null);
     const [isModal, setModal] = useState(null);
@@ -37,6 +37,7 @@ function AdminMenu() {
     const [isChecked3, setIsChecked3] = useState(false);
     const [selectedFile, setSelectedFile] = useState(null);
     const [menuPage, setMenuPage] = useState(1);
+    const [sort, SetSort] = useState(0)
     const [currentEditItem, setCurrentEditItem] = useState({
         id: '',
         name: '',
@@ -64,7 +65,8 @@ function AdminMenu() {
             category_id: iscategory,
             discount: discount,
             type: checked,
-            new: checked2
+            new: checked2,
+            sort:sort,
         };
         const formData = new FormData();
         for (let key of Object.keys(newMenu)) {
@@ -95,6 +97,7 @@ function AdminMenu() {
                 setPrice('');
                 setDiscount('');
                 setSelectedFile(null);
+                SetSort(0)
                 window.location.reload();
             })
             .catch((error) => {
@@ -176,6 +179,7 @@ function AdminMenu() {
         formData.append('price', currentEditItem.price);
         formData.append('category_id', currentEditItem.category_id);
         formData.append('new', currentEditItem.new);
+        formData.append('sort', currentEditItem.sort);
         if (selectedFile) {
             formData.append('image', selectedFile);
         } else {
@@ -205,6 +209,7 @@ function AdminMenu() {
                     discount:'',
                     new:false,
                     category_id: iscategory,
+                    sort:0
                 });
                 setIsChecked3(false);
                 ChangeActive();
@@ -297,15 +302,9 @@ function AdminMenu() {
                 <div className='AdminMenu-main '>
                     <div className='AdminMenu-main-category'>
                         
-                                            <Swiper
-      spaceBetween={50}
-      slidesPerView={3}
-    >
-
       {isItemCategory.map((item, index) => (
-                            <SwiperSlide> <button key={index} onClick={() => filterByCategory(item.id)} className={selectedCategory === item.id ? 'active2' : ''}>{item.name}</button></SwiperSlide>
+                            <button key={index} onClick={() => filterByCategory(item.id)} className={selectedCategory === item.id ? 'active2' : ''}>{item.name}</button>
                         ))}
-    </Swiper>
                     </div>
 
                     <div className='AdminMenu-table'>
@@ -325,6 +324,11 @@ function AdminMenu() {
                                     <th>
                                         <h3>
                                             Narx
+                                        </h3>
+                                    </th>
+                                    <th>
+                                        <h3>
+                                            Raqam
                                         </h3>
                                     </th>
                                     <th>
@@ -363,6 +367,11 @@ function AdminMenu() {
                                         <td>
                                             <h3>
                                                 {i.price}
+                                            </h3>
+                                        </td>
+                                        <td>
+                                            <h3>
+                                                {i.sort}
                                             </h3>
                                         </td>
                                         <td>
@@ -451,7 +460,8 @@ function AdminMenu() {
                                 onChange={(e) => setMenuName(e.target.value)}
                                 required id='name' type="text" />
                         </label>
-                        <label htmlFor="Price">
+                       <div className='Grid'>
+                       <label htmlFor="Price">
                             <h3>
                                 Narx
                             </h3>
@@ -461,6 +471,17 @@ function AdminMenu() {
                                 onChange={(e) => setPrice(e.target.value)}
                                 required id='Price' type="number" />
                         </label>
+                        <label htmlFor="Price">
+                            <h3>
+                                Raqam
+                            </h3>
+                            <input
+                            
+                                value={sort}
+                                onChange={(e) => SetSort(e.target.value)}
+                                required id='Price' type="number" />
+                        </label>
+                       </div>
                         <label htmlFor="sk">
                             <h3>
                                 Skidka
@@ -545,6 +566,7 @@ function AdminMenu() {
                                 onChange={(e) => setCurrentEditItem({ ...currentEditItem, name: e.target.value })}
                                 id='name' type="text" />
                         </label>
+                        <div className='Grid'>
                         <label htmlFor="Price">
                             <h3>
                                 Narx
@@ -554,6 +576,16 @@ function AdminMenu() {
                                 onChange={(e) => setCurrentEditItem({ ...currentEditItem, price: e.target.value })}
                                 id='Price' type="number" />
                         </label>
+                        <label htmlFor="so">
+                            <h3>
+                                Raqam
+                            </h3>
+                            <input
+                                value={currentEditItem.sort}
+                                onChange={(e) => setCurrentEditItem({ ...currentEditItem, sort: e.target.value })}
+                                id='so' type="number" />
+                        </label>
+                        </div>
                         <label htmlFor="sk">
                             <h3>
                                 Skidka
